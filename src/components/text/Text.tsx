@@ -3,14 +3,14 @@ import { ElementType, ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
-const titleVariants = cva('font-bold tracking-tight', {
+const textVariants = cva('font-bold tracking-tight', {
   variants: {
     size: {
       xl: 'text-4xl md:text-5xl lg:text-6xl',
       lg: 'text-3xl md:text-4xl lg:text-5xl',
-      md: 'text-2xl md:text-3xl lg:text-4xl',
+      md: 'text-md md:text-xl lg:text-2xl',
       sm: 'text-xl md:text-2xl lg:text-3xl',
-      xs: 'text-lg md:text-xl lg:text-2xl',
+      xs: 'text-xs md:text-xs lg:text-sm',
     },
     align: {
       left: 'text-left',
@@ -28,29 +28,27 @@ const titleVariants = cva('font-bold tracking-tight', {
   defaultVariants: {
     size: 'md',
     align: 'left',
-    weight: 'bold',
+    weight: 'normal',
   },
 });
 
-// Определяем типы для пропсов
-interface TitleProps extends VariantProps<typeof titleVariants> {
+interface TextProps extends VariantProps<typeof textVariants> {
   children: ReactNode;
   className?: string;
   as?: ElementType;
 }
 
-// Создаем компонент
-export const Title = ({
+export const Text = ({
   children,
   className,
-  as: Component = 'h2',
+  as: Component = 'p',
   size,
   align,
   weight,
   ...props
-}: TitleProps) => {
+}: TextProps) => {
   return (
-    <Component className={cn(titleVariants({ size, align, weight, className }))} {...props}>
+    <Component className={cn(textVariants({ size, align, weight, className }))} {...props}>
       {children}
     </Component>
   );

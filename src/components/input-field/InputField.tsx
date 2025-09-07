@@ -1,8 +1,4 @@
-'use client';
-// components/ui/input-field.tsx
-
-import { Eye, EyeOff } from 'lucide-react';
-import { forwardRef, InputHTMLAttributes, useState } from 'react';
+import { forwardRef, InputHTMLAttributes, ReactElement } from 'react';
 
 import { Input, Label } from '@/components/ui';
 import { cn } from '@/lib/utils';
@@ -11,13 +7,12 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
   helperText?: string;
+  children?: ReactElement;
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ className, label, error, helperText, id, type = 'text', ...props }, ref) => {
+  ({ className, label, error, helperText, id, children, ...props }, ref) => {
     const inputId = id || `input-${Math.random().toString(36)}`;
-
-    const [localType, setLocalType] = useState(type);
 
     return (
       <div className="flex flex-wrap items-center gap-2 relative">
@@ -31,17 +26,9 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           id={inputId}
           className={cn(error && 'border-destructive focus:ring-destructive', className)}
           ref={ref}
-          type={localType}
           {...props}
         />
-        {type === 'password' && (
-          <button
-            className="absolute right-4 bottom-2 cursor-pointer"
-            onClick={() => setLocalType((prev) => (prev === 'password' ? 'text' : 'password'))}
-          >
-            {localType === 'password' ? <Eye /> : <EyeOff />}
-          </button>
-        )}
+        {children}
         {error ? (
           <p className="px-4 text-sm text-destructive basis-full">{error}</p>
         ) : helperText ? (
