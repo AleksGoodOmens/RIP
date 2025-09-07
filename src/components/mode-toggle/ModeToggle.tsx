@@ -4,7 +4,7 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/components/ui';
 import {
   DropdownMenu,
   DropdownMenuContent,
