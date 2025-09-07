@@ -7,7 +7,7 @@ export default function HomePage() {
     <main>
       <div>
         <h1>Welcome to our App</h1>
-        <p>Please enter or login in</p>
+        <p>Please enter or register</p>
         <Navbar />
       </div>
     </main>

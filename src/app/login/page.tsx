@@ -11,6 +11,7 @@ export default function LoginPage() {
   return (
     <>
       <Navbar />
+      <h4>Please, login</h4>
       <AuthForm mode="login" onSuccess={() => router.push('/home')} />
     </>
   );

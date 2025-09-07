@@ -11,6 +11,7 @@ export default function RegisterPage() {
   return (
     <>
       <Navbar />
+      <h4>Please, register</h4>
       <AuthForm mode="register" onSuccess={() => router.push('/login')} />
     </>
   );

@@ -34,6 +34,8 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
       } else {
         await doCreateUserWithEmailAndPassword({ email, password });
       }
+      setEmail('');
+      setPassword('');
       onSuccess();
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -74,6 +76,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
+          autoComplete="new-parole"
           required
         />
         <input
@@ -81,6 +84,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+          autoComplete="new-password"
           required
         />
         {errorMessage && <p>{errorMessage}</p>}
