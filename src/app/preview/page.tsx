@@ -1,13 +1,23 @@
-import { InputField } from '@/components';
+import { InputField, Title } from '@/components';
 import { Button } from '@/components/ui';
 
 const PreviewPage = () => {
   return (
     <div>
-      <h1>Preview page h1 </h1>
-      <h2>Preview page h2 </h2>
-      <h3>Preview page h3 </h3>
-      <h4>Preview page h4 </h4>
+      <Title size={'xl'} as={'h1'}>
+        Title h1
+      </Title>
+      <Title size={'lg'}>Title h2</Title>
+      <Title size={'md'} align={'center'} as={'h3'}>
+        Title center md
+      </Title>
+      <Title size={'sm'} weight={'bold'} as={'h4'}>
+        Title center sm bold
+      </Title>
+      <Title size={'xs'} align={'right'}>
+        title xs right{' '}
+      </Title>
+
       <Button variant={'default'}>default</Button>
       <Button variant={'link'}>link</Button>
       <Button variant={'destructive'}>destructive</Button>
