@@ -2,8 +2,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  GoogleAuthProvider,
 } from 'firebase/auth';
-import { GoogleAuthProvider } from 'firebase/auth/cordova';
 
 import { auth } from './firebase';
 

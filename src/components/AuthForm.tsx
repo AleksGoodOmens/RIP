@@ -46,7 +46,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (): Promise<void> => {
     setIsSubmitting(true);
     try {
       await doSignInWithGoogle();
