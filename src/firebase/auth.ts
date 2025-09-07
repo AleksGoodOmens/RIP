@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth/cordova';
 
 import { auth } from './firebase';
@@ -8,17 +12,20 @@ interface EmailAndPasswordProps {
   password: string;
 }
 
-export const docreateUserWithEmailAndPassword = async ({
+export const doCreateUserWithEmailAndPassword = async ({
   email,
   password,
 }: EmailAndPasswordProps) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
+export const doSignInWithEmailAndPassword = async ({ email, password }: EmailAndPasswordProps) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
+
 export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(auth, provider);
-  return result;
+  return signInWithPopup(auth, provider);
 };
 
 export const doSignOut = () => {

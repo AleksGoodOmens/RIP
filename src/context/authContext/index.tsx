@@ -1,55 +1,51 @@
-import { onAuthStateChanged, User } from 'firebase/auth';
-import React, { useEffect, useState, ReactNode, useContext } from 'react';
+'use client';
 
-import { auth } from '../../firebase/firebase';
+import { onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+
+import { auth } from '@/firebase/firebase';
 
 interface AuthContextType {
   user: User | null;
-  userLoggedIn: boolean;
   loading: boolean;
+  logout: () => Promise<void>;
 }
 
-const defaultAuthContext: AuthContextType = {
+const AuthContext = createContext<AuthContextType>({
   user: null,
-  userLoggedIn: false,
   loading: true,
-};
-
-export const AuthContext = React.createContext<AuthContextType>(defaultAuthContext);
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
+  logout: async () => {},
+});
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
-        setUser(firebaseUser);
-        setUserLoggedIn(true);
-      } else {
-        setUser(null);
-        setUserLoggedIn(false);
-      }
+      setUser(firebaseUser);
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  const value: AuthContextType = {
-    user,
-    userLoggedIn,
-    loading,
+  const logout = async () => {
+    await signOut(auth);
+    setUser(null);
   };
 
-  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, loading, logout }}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }
