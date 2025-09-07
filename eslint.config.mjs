@@ -37,7 +37,7 @@ const eslintConfig = [
       '@typescript-eslint/no-unsafe-member-access': 'error',
       '@typescript-eslint/no-unsafe-call': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
-      //'@typescript-eslint/no-misused-promises': 'error',
+      '@typescript-eslint/no-misused-promises': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },

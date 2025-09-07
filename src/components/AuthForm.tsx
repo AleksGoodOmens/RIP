@@ -46,6 +46,10 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
     }
   };
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    void handleSubmit(e);
+  };
+
   const handleGoogleSignIn = async (): Promise<void> => {
     setIsSubmitting(true);
     try {
@@ -64,7 +68,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <input
           type="email"
           value={email}
