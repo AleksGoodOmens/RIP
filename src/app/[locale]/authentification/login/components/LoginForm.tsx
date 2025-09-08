@@ -1,8 +1,7 @@
 'use client';
 
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '@/firebase/auth';
-
-import { useLoginForm } from '../../../../utils/hooks/useAuth';
+import { useLoginForm } from '@/utils/hooks/useAuth';
 
 interface LoginFormProps {
   onSuccess: () => void;

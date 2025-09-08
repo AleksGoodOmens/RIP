@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import RegisterForm from '@/app/authentification/register/components/RegisterForm';
+import RegisterForm from './components/RegisterForm';
 
 export default function RegisterPage() {
   const router = useRouter();
