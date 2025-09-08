@@ -2,17 +2,15 @@
 
 import { useRouter } from 'next/navigation';
 
-import AuthForm from '@/components/AuthForm';
-import Navbar from '@/components/NavBar';
+import RegisterForm from '@/app/authentification/register/components/RegisterForm';
 
 export default function RegisterPage() {
   const router = useRouter();
 
   return (
     <>
-      <Navbar />
       <h4>Please, register</h4>
-      <AuthForm mode="register" onSuccess={() => router.push('/login')} />
+      <RegisterForm onSuccess={() => router.push('/login')} />
     </>
   );
 }

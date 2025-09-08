@@ -1,6 +1,5 @@
 'use client';
-
-import Navbar from '@/components/NavBar';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -8,7 +7,7 @@ export default function HomePage() {
       <div>
         <h1>Welcome to our App</h1>
         <p>Please enter or register</p>
-        <Navbar />
+        <Link href="/authentification">Authorize</Link>
       </div>
     </main>
   );
