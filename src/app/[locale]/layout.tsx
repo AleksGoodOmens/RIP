@@ -1,13 +1,15 @@
+// app/[locale]/layout.tsx
 import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { hasLocale } from 'next-intl';
 
-import { ModeToggle, ThemeProvider } from '@/components';
+import { ModeToggle } from '@/components';
 import LocaleSwitcher from '@/components/local-switcher/LocalSwitcher';
 import { routing } from '@/i18n/routing';
 
-import type { Metadata } from 'next';
+import Providers from './Providers'; // 👈
 
+import type { Metadata } from 'next';
 import './globals.css';
 
 const geistSans = Geist({
@@ -36,24 +38,19 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+
   const messages = (await import(`../../../messages/${locale}.json`)).default;
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <header>
-              <ModeToggle />
-              <LocaleSwitcher />
-            </header>
-            {children}
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <Providers locale={locale} messages={messages}>
+          <header>
+            <ModeToggle />
+            <LocaleSwitcher />
+          </header>
+          {children}
+        </Providers>
       </body>
     </html>
   );
