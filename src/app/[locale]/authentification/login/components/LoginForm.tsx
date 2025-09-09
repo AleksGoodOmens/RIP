@@ -8,6 +8,7 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useLoginForm();
 
@@ -15,13 +16,20 @@ export default function LoginForm() {
     const formData = new FormData();
     formData.append('email', data.email);
     formData.append('password', data.password);
-    await loginAction(formData);
+
+    const result = await loginAction(formData);
+
+    if (!result.success) {
+      Object.entries(result.fieldErrors).forEach(([field, message]) => {
+        setError(field as keyof typeof data, { message });
+      });
+    }
   };
 
   return (
-    <form onSubmit={() => handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input type="email" placeholder="Email" autoComplete="new-email" {...register('email')} />
-      {errors.email && <p>{errors.email.message}</p>}
+      {errors.email && <p role="alert">{errors.email.message}</p>}
 
       <input
         type="password"
@@ -29,7 +37,7 @@ export default function LoginForm() {
         autoComplete="new-password"
         {...register('password')}
       />
-      {errors.password && <p>{errors.password.message}</p>}
+      {errors.password && <p role="alert">{errors.password.message}</p>}
 
       <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Logging in...' : 'Login'}

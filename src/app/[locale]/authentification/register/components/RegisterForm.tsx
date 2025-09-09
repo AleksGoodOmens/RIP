@@ -1,6 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useRegisterForm } from '@/utils/hooks/useAuth';
+import { usePasswordRequirements } from '@/utils/hooks/usePasswordRequirements';
 
 import { registerAction } from '../actions';
 
@@ -11,7 +14,12 @@ export default function RegisterForm() {
     setError,
     formState: { errors, isSubmitting },
     reset,
+    watch,
   } = useRegisterForm();
+
+  const password = watch('password') ?? '';
+  const checks = usePasswordRequirements(password);
+  const [isFocused, setIsFocused] = useState(false);
 
   const onSubmit = async (data: { email: string; password: string; confirmPassword: string }) => {
     const formData = new FormData();
@@ -32,7 +40,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={() => handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input type="email" placeholder="Email" autoComplete="new-email" {...register('email')} />
       {errors.email && <p>{errors.email.message}</p>}
 
@@ -41,8 +49,20 @@ export default function RegisterForm() {
         placeholder="Password"
         autoComplete="new-password"
         {...register('password')}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
       {errors.password && <p>{errors.password.message}</p>}
+
+      {isFocused && (
+        <ul style={{ marginBottom: '1rem' }}>
+          {checks.map(({ label, met }) => (
+            <li key={label} style={{ color: met ? 'green' : 'red' }}>
+              {met ? '✓' : '✗'} {label}
+            </li>
+          ))}
+        </ul>
+      )}
 
       <input
         type="password"
