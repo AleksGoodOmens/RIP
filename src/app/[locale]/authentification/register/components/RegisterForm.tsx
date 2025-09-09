@@ -1,40 +1,34 @@
 'use client';
 
-import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '@/firebase/auth';
 import { useRegisterForm } from '@/utils/hooks/useAuth';
 
-interface RegisterFormProps {
-  onSuccess: () => void;
-}
+import { registerAction } from '../actions';
 
-export default function RegisterForm({ onSuccess }: RegisterFormProps) {
+export default function RegisterForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
     reset,
   } = useRegisterForm();
 
   const onSubmit = async (data: { email: string; password: string; confirmPassword: string }) => {
-    try {
-      await doCreateUserWithEmailAndPassword({
-        email: data.email,
-        password: data.password,
-      });
-      reset();
-      onSuccess();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    formData.append('confirmPassword', data.confirmPassword);
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await doSignInWithGoogle();
-      onSuccess();
-    } catch (err) {
-      console.error(err);
+    const result = await registerAction(formData);
+
+    if (!result.success) {
+      Object.entries(result.fieldErrors).forEach(([field, message]) => {
+        setError(field as keyof typeof data, { message });
+      });
+      return;
     }
+
+    reset();
   };
 
   return (
@@ -60,16 +54,6 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
 
       <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Processing...' : 'Register'}
-      </button>
-
-      <button
-        type="button"
-        onClick={() => {
-          void handleGoogleSignIn();
-        }}
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Signing in...' : 'Sign in with Google'}
       </button>
     </form>
   );
