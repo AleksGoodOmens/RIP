@@ -7,7 +7,7 @@ import { ModeToggle } from '@/components';
 import LocaleSwitcher from '@/components/local-switcher/LocalSwitcher';
 import { routing } from '@/i18n/routing';
 
-import Providers from './Providers'; // 👈
+import Providers from '../../providers/Providers'; // 👈
 
 import type { Metadata } from 'next';
 import './globals.css';

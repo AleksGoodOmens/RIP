@@ -11,10 +11,19 @@ export const useLoginForm = () =>
   useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
 export const useRegisterForm = () =>
   useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
-    mode: 'onSubmit',
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   });

@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
 
-export default function AuthentificationRedirectPage({ params }: { params: { locale: string } }) {
-  redirect(`/${params.locale}/authentification/login`);
-}
+const RedirectionPage = () => {
+  redirect('/');
+};
+
+export default RedirectionPage;

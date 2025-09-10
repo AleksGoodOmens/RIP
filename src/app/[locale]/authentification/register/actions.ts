@@ -4,15 +4,11 @@ import { doCreateUserWithEmailAndPassword } from '@/firebase/auth';
 import { mapFirebaseErrorToField } from '@/utils/authErrors';
 import { registerSchema } from '@/utils/zod/zod-schemas';
 
+import { onSubmitProps } from './components/RegisterForm';
+
 type RegisterResult = { success: true } | { success: false; fieldErrors: Record<string, string> };
 
-export async function registerAction(formData: FormData): Promise<RegisterResult> {
-  const raw = {
-    email: formData.get('email'),
-    password: formData.get('password'),
-    confirmPassword: formData.get('confirmPassword'),
-  };
-
+export async function registerAction(raw: onSubmitProps): Promise<RegisterResult> {
   const parsed = registerSchema.safeParse(raw);
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {};

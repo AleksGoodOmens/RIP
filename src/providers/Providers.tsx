@@ -2,8 +2,8 @@
 
 import { NextIntlClientProvider, Messages } from 'next-intl';
 
-import { ThemeProvider } from '@/components';
-import { AuthProvider } from '@/context/authContext';
+import { AuthProvider } from '@/providers/auth/AuthProvider';
+import { ThemeProvider } from '@/providers/theme/ThemeProvider';
 
 interface ProvidersProps {
   children: React.ReactNode;
