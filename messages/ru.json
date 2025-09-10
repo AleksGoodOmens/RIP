@@ -1,5 +1,9 @@
 {
   "home": {
     "header": "Заголовок"
+  },
+  "notFound": {
+    "header": "Эта страница еще не RIP",
+    "button": "Домой"
   }
 }
