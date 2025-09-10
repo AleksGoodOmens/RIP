@@ -11,29 +11,27 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ className, label, error, helperText, id, children, ...props }, ref) => {
-    const inputId = id || `input-${Math.random().toString(36)}`;
-
+  ({ className, label, error, helperText, name, children, ...props }, ref) => {
     return (
       <div className="flex flex-wrap items-center gap-2 relative">
         <Label
-          htmlFor={inputId}
+          htmlFor={name}
           className={cn('font-bold capitalize px-2', error && 'text-destructive')}
         >
           {label}
         </Label>
         <Input
-          id={inputId}
           className={cn(error && 'border-destructive focus:ring-destructive', className)}
           ref={ref}
+          id={name}
+          name={name}
           {...props}
         />
         {children}
-        {error ? (
-          <p className="px-4 text-sm text-destructive basis-full">{error}</p>
-        ) : helperText ? (
+        {error && <p className="px-4 text-sm text-destructive basis-full">{error}</p>}
+        {helperText && (
           <p className="px-4 text-sm text-muted-foreground basis-full">{helperText}</p>
-        ) : null}
+        )}
       </div>
     );
   }
