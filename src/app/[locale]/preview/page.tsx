@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
+
 import { InputField, Text } from '@/components';
 import { Button } from '@/components/ui';
+
+export const metadata: Metadata = {
+  title: 'Preview - JustCodeIt',
+};
 
 const PreviewPage = () => {
   return (

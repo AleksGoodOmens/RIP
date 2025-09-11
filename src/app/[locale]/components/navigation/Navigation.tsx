@@ -18,12 +18,11 @@ export const Navigation = () => {
 
   const links = navLinks.map((link) => {
     const isActive = pathname === link.href;
-    console.log(pathname === link.href);
     return (
       <Link
         className={cn(
           'text-primary capitalize hover:text-destructive py-2 hover:animate-pulse transition-colors duration-100',
-          isActive && 'text-destructive animate-spin repeat-1 text-shadow-lg'
+          isActive && 'text-destructive animate-pulse md:animate-spin md:repeat-1 text-shadow-lg'
         )}
         key={link.href}
         href={link.href}
@@ -32,5 +31,5 @@ export const Navigation = () => {
       </Link>
     );
   });
-  return <nav className="grid gap-4 grid-flow-col px-4">{links}</nav>;
+  return <nav className="grid gap-4 md:grid-flow-col px-4">{links}</nav>;
 };
