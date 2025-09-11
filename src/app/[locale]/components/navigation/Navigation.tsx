@@ -1,4 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
+
 import { Link, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -11,6 +13,9 @@ const navLinks = [
 
 export const Navigation = () => {
   const pathname = usePathname();
+
+  const t = useTranslations('navigation');
+
   const links = navLinks.map((link) => {
     const isActive = pathname === link.href;
     console.log(pathname === link.href);
@@ -23,7 +28,7 @@ export const Navigation = () => {
         key={link.href}
         href={link.href}
       >
-        {link.name}
+        {t(link.name)}
       </Link>
     );
   });

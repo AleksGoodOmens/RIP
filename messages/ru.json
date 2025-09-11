@@ -1,5 +1,11 @@
 {
   "home": {
     "header": "Заголовок"
+  },
+  "navigation": {
+    "home": "домой",
+    "REST-client": "REST-клиент",
+    "preview": "превью",
+    "history": "история"
   }
 }
