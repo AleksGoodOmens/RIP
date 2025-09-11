@@ -1,11 +1,14 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { FormEvent } from 'react';
 
 import SelectMethod from '../select-method/SelectMethod';
 import { Button, Input } from '../ui';
 
 export default function RestClient() {
+  const t = useTranslations('rest-client');
+
   const router = useRouter();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -22,8 +25,8 @@ export default function RestClient() {
     <div>
       <form className="flex gap-1" onSubmit={handleSubmit}>
         <SelectMethod name="select" />
-        <Input name="url-input" placeholder="Enter URL or paste text" />
-        <Button type="submit">Send</Button>
+        <Input name="url-input" placeholder={t('url-placeholder')} />
+        <Button type="submit">{t('send')}</Button>
       </form>
     </div>
   );
