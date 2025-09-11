@@ -2,8 +2,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
-import { ModeToggle, ThemeProvider } from '@/components';
-import LocaleSwitcher from '@/components/local-switcher/LocalSwitcher';
+import { LocaleSwitcher, ModeToggle, ThemeProvider } from '@/components';
 import { routing } from '@/i18n/routing';
 
 import type { Metadata } from 'next';

@@ -3,10 +3,9 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { FormEvent } from 'react';
 
-import SelectMethod from '../select-method/SelectMethod';
-import { Button, Input } from '../ui';
+import { SelectMethod, Button, Input } from '@/components';
 
-export default function RestClient() {
+export function RestClient() {
   const t = useTranslations('rest-client');
 
   const router = useRouter();
@@ -16,7 +15,7 @@ export default function RestClient() {
     const formData = new FormData(event.currentTarget);
     const url = formData.get('url-input') as string;
     const method = formData.get('select') as string;
-    if (!url) return console.log(formData.get('select'));
+    if (!url) return;
     const encodedUrl = btoa(url);
     const path = `/${method}/${encodedUrl}`;
     router.push(path);

@@ -1,5 +1,5 @@
 'use client';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components';
 
 const METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'] as const;
 
@@ -13,7 +13,7 @@ interface SelectMethodProps {
   name: string;
 }
 
-export default function SelectMethod({
+export function SelectMethod({
   value,
   defaultValue = 'GET',
   onValueChange,

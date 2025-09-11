@@ -1,4 +1,4 @@
-import RestClient from '@/components/rest-client/RestClient';
+import { RestClient } from '@/components';
 
 export default function RestClientPage() {
   return (
