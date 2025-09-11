@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Text } from '@/components';
+
 import aleksAvatar from './images/ALEKS.png';
 import daniarAvatar from './images/DANIAR.jpg';
 import lenaAvatar from './images/LENA.jpg';
@@ -52,7 +54,12 @@ export const Footer = () => {
         <Image src={rssLogo} alt="RS-School" width={50} />
       </Link>
       {year}
-      <nav className="flex gap-4">{developersLinks}</nav>
+      <div>
+        <Text align={'center'} as={'h3'} size={'md'}>
+          JustCodeIt
+        </Text>
+        <nav className="flex gap-4 mt-2">{developersLinks}</nav>
+      </div>
     </footer>
   );
 };
