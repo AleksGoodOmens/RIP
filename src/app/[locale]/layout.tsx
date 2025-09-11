@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components';
 import { routing } from '@/i18n/routing';
 
 import './globals.css';
+import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 
 import type { Metadata } from 'next';
@@ -39,7 +40,9 @@ export default async function RootLayout({
   const messages = (await import(`../../../messages/${locale}.json`)).default;
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -48,7 +51,8 @@ export default async function RootLayout({
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
             <Header />
-            <main className="pt-32">{children}</main>
+            <main className="pt-32 grow">{children}</main>
+            <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
