@@ -78,12 +78,13 @@ export const Header = () => {
       };
     };
 
-    window.addEventListener('scroll', throttledHandleScroll());
+    const scrollHandler = throttledHandleScroll();
+    window.addEventListener('scroll', scrollHandler);
 
     return () => {
-      window.removeEventListener('scroll', throttledHandleScroll());
+      window.removeEventListener('scroll', scrollHandler);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <header
