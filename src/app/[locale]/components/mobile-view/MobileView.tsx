@@ -1,9 +1,7 @@
 import { CircleX } from 'lucide-react';
 
-import { LocaleSwitcher, Logo, ModeToggle } from '@/components';
+import { LocaleSwitcher, Logo, ModeToggle, Navigation } from '@/components';
 import { cn } from '@/lib/utils';
-
-import { Navigation } from '../navigation/Navigation';
 
 interface Props {
   toggleBurger: () => void;

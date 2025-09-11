@@ -1,6 +1,4 @@
-import { LocaleSwitcher, ModeToggle } from '@/components';
-
-import { Navigation } from '../navigation/Navigation';
+import { LocaleSwitcher, ModeToggle, Navigation } from '@/components';
 
 export const DesktopView = () => {
   return (
