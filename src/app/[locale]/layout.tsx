@@ -2,13 +2,13 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
-import { ModeToggle, ThemeProvider } from '@/components';
-import LocaleSwitcher from '@/components/local-switcher/LocalSwitcher';
+import { ThemeProvider } from '@/components';
 import { routing } from '@/i18n/routing';
 
-import type { Metadata } from 'next';
-
 import './globals.css';
+import { Header } from './components/header/Header';
+
+import type { Metadata } from 'next';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -47,11 +47,8 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <header>
-              <ModeToggle />
-              <LocaleSwitcher />
-            </header>
-            {children}
+            <Header />
+            <main className="pt-26">{children}</main>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
