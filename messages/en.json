@@ -1,5 +1,12 @@
 {
   "home": {
     "header": "Header"
+  },
+
+  "navigation": {
+    "home": "home",
+    "REST-client": "REST-client",
+    "preview": "preview",
+    "history": "history"
   }
 }
