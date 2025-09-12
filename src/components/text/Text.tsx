@@ -24,6 +24,9 @@ const textVariants = cva('font-bold tracking-tight', {
       bold: 'font-bold',
       extrabold: 'font-extrabold',
     },
+    variant: {
+      'block-title': 'font-bold text-xl text-destructive',
+    },
   },
   defaultVariants: {
     size: 'md',
@@ -45,10 +48,11 @@ export const Text = ({
   size,
   align,
   weight,
+  variant,
   ...props
 }: TextProps) => {
   return (
-    <Component className={cn(textVariants({ size, align, weight, className }))} {...props}>
+    <Component className={cn(textVariants({ size, align, weight, className, variant }))} {...props}>
       {children}
     </Component>
   );

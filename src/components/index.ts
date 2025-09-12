@@ -8,3 +8,8 @@ export * from './ui/select';
 export * from './ui/button';
 export * from './ui/input';
 export * from './local-switcher/LocalSwitcher';
+export * from './pairs-editor/PairsEditor';
+export * from './pair/Pair';
+export * from './logo/Logo';
+export * from './burger/Burger';
+export * from './navigation/Navigation';
