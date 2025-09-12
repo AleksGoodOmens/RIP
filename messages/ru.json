@@ -5,5 +5,11 @@
   "notFound": {
     "header": "Эта страница еще не RIP",
     "button": "Домой"
+  },
+  "navigation": {
+    "home": "домой",
+    "REST-client": "REST-клиент",
+    "preview": "превью",
+    "history": "история"
   }
 }
