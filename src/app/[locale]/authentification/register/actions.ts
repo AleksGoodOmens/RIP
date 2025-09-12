@@ -1,25 +1,18 @@
 import { redirect } from 'next/navigation';
 
 import { doCreateUserWithEmailAndPassword } from '@/firebase/auth';
+import { FormActionResult } from '@/lib/utils';
 import { mapFirebaseErrorToField } from '@/utils/authErrors';
+import { parseForm } from '@/utils/zod/parse-form';
 import { registerSchema } from '@/utils/zod/zod-schemas';
 
-import { onSubmitProps } from './components/RegisterForm';
-
-type RegisterResult = { success: true } | { success: false; fieldErrors: Record<string, string> };
-
-export async function registerAction(raw: onSubmitProps): Promise<RegisterResult> {
-  const parsed = registerSchema.safeParse(raw);
-  if (!parsed.success) {
-    const fieldErrors: Record<string, string> = {};
-    parsed.error.issues.forEach((issue) => {
-      const field = issue.path[0];
-      if (typeof field === 'string') {
-        fieldErrors[field] = issue.message;
-      }
-    });
-    return { success: false, fieldErrors };
-  }
+export async function registerAction(raw: {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}): Promise<FormActionResult> {
+  const parsed = parseForm(registerSchema, raw);
+  if (!parsed.success) return parsed;
 
   const { email, password, confirmPassword } = parsed.data;
 
@@ -36,12 +29,7 @@ export async function registerAction(raw: onSubmitProps): Promise<RegisterResult
     await doCreateUserWithEmailAndPassword({ email, password });
   } catch (error) {
     const { field, message } = mapFirebaseErrorToField(error);
-    return {
-      success: false,
-      fieldErrors: {
-        [field]: message,
-      },
-    };
+    return { success: false, fieldErrors: { [field]: message } };
   }
 
   redirect('/home');
