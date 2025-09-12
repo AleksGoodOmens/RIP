@@ -27,5 +27,24 @@
   },
   "register": {
     "header": "Пожалуйста, зарегистрируйтесь"
+  },
+  "rest-client": {
+    "send": "Отправить",
+    "url-placeholder": "Введите URL или вставьте текст"
+  },
+  "mod": {
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Системная"
+  },
+  "notFound": {
+    "header": "Эта страница еще не RIP",
+    "button": "Домой"
+  },
+  "navigation": {
+    "home": "домой",
+    "REST-client": "REST-клиент",
+    "preview": "превью",
+    "history": "история"
   }
 }
