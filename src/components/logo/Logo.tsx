@@ -7,7 +7,7 @@ interface Props {
 }
 export const Logo = ({ width = 96 }: Props) => {
   return (
-    <div className="rounded-full shadow-2xl bg-ring">
+    <div className="rounded-full shadow-2xl bg-foreground dark:bg-ring">
       <Image src={logoIcon} alt="justCodeIt RIP client" width={width} />
     </div>
   );
