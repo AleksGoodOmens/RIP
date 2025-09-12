@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { doSignOut } from '@/firebase/auth';
 
-export default function SignOutButton() {
+function SignOutButton() {
   const router = useRouter();
 
   const handleSignOut = async (): Promise<void> => {
@@ -18,3 +18,5 @@ export default function SignOutButton() {
 
   return <button onClick={() => void handleSignOut()}>Sign out</button>;
 }
+
+export { SignOutButton };

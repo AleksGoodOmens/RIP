@@ -54,15 +54,6 @@ export default function RegisterForm() {
         error={errors.password?.message}
       />
 
-      {/* {isFocused && (
-        <ul className="mb-2">
-          {checks.map(({ label, met }) => (
-            <li key={label} style={{ color: met ? 'green' : 'red' }}>
-              {met ? '✓' : '✗'} {label}
-            </li>
-          ))}
-        </ul>
-      )} */}
       <InputField
         label="Confirm Password"
         type="password"

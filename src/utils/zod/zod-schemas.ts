@@ -7,6 +7,8 @@ export const loginSchema = z.object({
     .nonempty('please type password')
     .regex(/[a-z]/, '1 lowercase letter')
     .regex(/[A-Z]/, '1 uppercase letter')
+    .regex(/\d/, '1 digit')
+    .regex(/[^A-Za-z0-9]/, '1 special character')
     .min(6, 'At least 6 characters'),
 });
 

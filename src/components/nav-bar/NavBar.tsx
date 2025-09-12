@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function Navbar() {
+function Navbar() {
   return (
     <nav>
       <Link href="/authentification/login">Enter</Link>
@@ -10,3 +10,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export { Navbar };

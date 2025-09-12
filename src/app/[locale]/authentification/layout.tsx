@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { PropsWithChildren, useContext, useEffect } from 'react';
 
-import Navbar from '@/components/NavBar';
+import { Navbar } from '@/components';
 import { AuthContext } from '@/context/authContext';
 
 export default function AuthLayout({ children }: PropsWithChildren) {

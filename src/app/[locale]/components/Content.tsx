@@ -2,8 +2,7 @@
 
 import { useContext } from 'react';
 
-import { Text } from '@/components';
-import Navbar from '@/components/NavBar';
+import { Text , Navbar } from '@/components';
 import { AuthContext } from '@/context/authContext';
 
 export const Content = () => {

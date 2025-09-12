@@ -1,5 +1,6 @@
 'use client';
 
+import { InputField } from '@/components';
 import { useLoginForm } from '@/utils/hooks/useAuth';
 
 import { loginAction } from '../action';
@@ -28,10 +29,17 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="email" placeholder="Email" autoComplete="new-email" {...register('email')} />
+      <InputField
+        label="Email"
+        type="email"
+        placeholder="Email"
+        autoComplete="new-email"
+        {...register('email')}
+      />
       {errors.email && <p role="alert">{errors.email.message}</p>}
 
-      <input
+      <InputField
+        label="Password"
         type="password"
         placeholder="Password"
         autoComplete="new-password"
