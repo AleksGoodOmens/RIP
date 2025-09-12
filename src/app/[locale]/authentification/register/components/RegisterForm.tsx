@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { InputField, PasswordField } from '@/components';
 import { Button } from '@/components/ui';
 import { useRegisterForm } from '@/utils/hooks/useAuth';
@@ -21,6 +23,7 @@ export default function RegisterForm() {
     reset,
   } = useRegisterForm();
 
+  const t = useTranslations();
   const onSubmit = async (data: onSubmitProps) => {
     const result = await registerAction(data);
 
@@ -39,9 +42,9 @@ export default function RegisterForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-1">
         <InputField
-          label="Email"
+          label={t('email.label')}
           type="email"
-          placeholder="Email"
+          placeholder={t('email.placeholder')}
           autoComplete="new-email"
           error={errors.email?.message}
           {...register('email')}
@@ -54,15 +57,15 @@ export default function RegisterForm() {
       </div>
 
       <PasswordField
-        label="Password"
-        placeholder="Password"
+        label={t('password.label')}
+        placeholder={t('password.placeholder')}
         error={errors.password?.message}
         register={register('password')}
       />
 
       <PasswordField
-        label="Confirm Password"
-        placeholder="Confirm Password"
+        label={t('confirmPassword.label')}
+        placeholder={t('confirmPassword.placeholder')}
         error={errors.confirmPassword?.message}
         register={register('confirmPassword')}
       />
@@ -73,7 +76,7 @@ export default function RegisterForm() {
         className="w-full"
         disabled={isSubmitting || !isValid}
       >
-        {isSubmitting ? 'Processing...' : 'Register'}
+        {isSubmitting ? t('button.processing') : t('button.submit')}
       </Button>
     </form>
   );

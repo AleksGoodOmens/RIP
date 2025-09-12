@@ -1,5 +1,21 @@
 {
   "home": {
     "header": "Заголовок"
+  },
+  "email": {
+    "label": "Электронная почта",
+    "placeholder": "Введите адрес"
+  },
+  "password": {
+    "label": "Пароль",
+    "placeholder": "Введите пароль"
+  },
+  "confirmPassword": {
+    "label": "Подтвердите пароль",
+    "placeholder": "Повторите пароль"
+  },
+  "button": {
+    "submit": "Зарегистрироваться",
+    "processing": "Обработка..."
   }
 }
