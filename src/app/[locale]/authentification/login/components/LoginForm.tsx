@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { InputField, PasswordField } from '@/components';
 import { Button } from '@/components/ui';
 import { useLoginForm } from '@/utils/hooks/useAuth';
@@ -7,6 +9,7 @@ import { useLoginForm } from '@/utils/hooks/useAuth';
 import { loginAction } from '../action';
 
 export default function LoginForm() {
+  const t = useTranslations();
   const {
     register,
     handleSubmit,
@@ -30,9 +33,9 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <InputField
-        label="Email"
+        label={t('email.label')}
         type="email"
-        placeholder="Email"
+        placeholder={t('email.placeholder')}
         autoComplete="new-email"
         {...register('email')}
       />
@@ -43,15 +46,15 @@ export default function LoginForm() {
       )}
 
       <PasswordField
-        label="Password"
-        placeholder="Password"
+        label={t('password.label')}
+        placeholder={t('password.placeholder')}
         autoComplete="new-password"
         error={errors.password?.message}
         register={register('password')}
       />
 
       <Button variant="outline" type="submit" disabled={isSubmitting} className="w-full">
-        {isSubmitting ? 'Logging in...' : 'Login'}
+        {isSubmitting ? t('button.processing') : t('button.enter')}
       </Button>
     </form>
   );

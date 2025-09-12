@@ -1,10 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { doSignOut } from '@/firebase/auth';
 
+import { Button } from '../ui';
+
 function SignOutButton() {
+  const t = useTranslations();
   const router = useRouter();
 
   const handleSignOut = async (): Promise<void> => {
@@ -16,7 +20,11 @@ function SignOutButton() {
     }
   };
 
-  return <button onClick={() => void handleSignOut()}>Sign out</button>;
+  return (
+    <Button variant="outline" onClick={() => void handleSignOut()}>
+      {t('button.signout')}
+    </Button>
+  );
 }
 
 export { SignOutButton };

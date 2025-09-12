@@ -17,6 +17,16 @@
   },
   "button": {
     "submit": "Register",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "enter": "Enter",
+    "login": "Login",
+    "register": "Register",
+    "signout": "Sign out"
+  },
+  "login": {
+    "header": "Please, sign in"
+  },
+  "register": {
+    "header": "Please, sign up"
   }
 }
