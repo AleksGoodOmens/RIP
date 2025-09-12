@@ -2,11 +2,17 @@
 
 import Link from 'next/link';
 
+import { Button } from '../ui';
+
 function Navbar() {
   return (
     <nav>
-      <Link href="/authentification/login">Enter</Link>
-      <Link href="/authentification/register">Register</Link>
+      <Button variant="link" asChild>
+        <Link href="/authentification/login">Login</Link>
+      </Button>
+      <Button variant="link" asChild>
+        <Link href="/authentification/register">Register</Link>
+      </Button>
     </nav>
   );
 }

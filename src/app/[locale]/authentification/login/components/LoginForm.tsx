@@ -1,6 +1,7 @@
 'use client';
 
-import { InputField } from '@/components';
+import { InputField, PasswordField } from '@/components';
+import { Button } from '@/components/ui';
 import { useLoginForm } from '@/utils/hooks/useAuth';
 
 import { loginAction } from '../action';
@@ -26,9 +27,8 @@ export default function LoginForm() {
       });
     }
   };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <InputField
         label="Email"
         type="email"
@@ -36,20 +36,23 @@ export default function LoginForm() {
         autoComplete="new-email"
         {...register('email')}
       />
-      {errors.email && <p role="alert">{errors.email.message}</p>}
+      {errors.email && (
+        <p role="alert" className="text-destructive text-sm">
+          {errors.email.message}
+        </p>
+      )}
 
-      <InputField
+      <PasswordField
         label="Password"
-        type="password"
         placeholder="Password"
         autoComplete="new-password"
-        {...register('password')}
+        error={errors.password?.message}
+        register={register('password')}
       />
-      {errors.password && <p role="alert">{errors.password.message}</p>}
 
-      <button type="submit" disabled={isSubmitting}>
+      <Button variant="outline" type="submit" disabled={isSubmitting} className="w-full">
         {isSubmitting ? 'Logging in...' : 'Login'}
-      </button>
+      </Button>
     </form>
   );
 }

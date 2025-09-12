@@ -14,8 +14,8 @@ export default function AuthLayout({ children }: PropsWithChildren) {
     if (user) router.push('/');
   }, [user, router]);
   return (
-    <section>
-      {!user && (
+    <section className="flex min-h-screen flex-col items-center justify-center bg-background">
+      {!user && !loading && (
         <>
           <Navbar />
           {children}

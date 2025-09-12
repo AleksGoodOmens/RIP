@@ -1,6 +1,7 @@
 'use client';
 
-import { InputField } from '@/components';
+import { InputField, PasswordField } from '@/components';
+import { Button } from '@/components/ui';
 import { useRegisterForm } from '@/utils/hooks/useAuth';
 
 import { registerAction } from '../actions';
@@ -35,37 +36,45 @@ export default function RegisterForm() {
 
   console.log(errors.email?.message);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <InputField
-        label="Email"
-        type="email"
-        placeholder="Email"
-        autoComplete="new-email"
-        error={errors.email?.message}
-        {...register('email')}
-      />
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div className="space-y-1">
+        <InputField
+          label="Email"
+          type="email"
+          placeholder="Email"
+          autoComplete="new-email"
+          error={errors.email?.message}
+          {...register('email')}
+        />
+        {errors.email && (
+          <p role="alert" className="text-destructive text-sm">
+            {errors.email.message}
+          </p>
+        )}
+      </div>
 
-      <InputField
+      <PasswordField
         label="Password"
-        type="password"
         placeholder="Password"
-        autoComplete="new-password"
-        {...register('password')}
         error={errors.password?.message}
+        register={register('password')}
       />
 
-      <InputField
+      <PasswordField
         label="Confirm Password"
-        type="password"
         placeholder="Confirm Password"
-        autoComplete="new-password"
-        {...register('confirmPassword')}
         error={errors.confirmPassword?.message}
+        register={register('confirmPassword')}
       />
 
-      <button type="submit" disabled={isSubmitting || !isValid}>
+      <Button
+        variant="outline"
+        type="submit"
+        className="w-full"
+        disabled={isSubmitting || !isValid}
+      >
         {isSubmitting ? 'Processing...' : 'Register'}
-      </button>
+      </Button>
     </form>
   );
 }
