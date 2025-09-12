@@ -1,5 +1,15 @@
 {
   "home": {
     "header": "Header"
+  },
+  "notFound": {
+    "header": "This page is not RIP yet",
+    "button": "go home"
+  },
+  "navigation": {
+    "home": "home",
+    "REST-client": "REST-client",
+    "preview": "preview",
+    "history": "history"
   }
 }
