@@ -1,9 +1,12 @@
 import { InputField, Text } from '@/components';
 import { Button } from '@/components/ui';
 
+import { ClientPreview } from './ClientPreview';
+
 const PreviewPage = () => {
   return (
     <div>
+      <ClientPreview />
       <div className="p-4">
         <Text size={'xl'} as={'h1'}>
           Text h1
