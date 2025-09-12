@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const PreviewPage = () => {
   return (
     <div className="p-4">
-            <ClientPreview />
+      <ClientPreview />
       <div className="p-4">
         <Text size={'xl'} as={'h1'}>
           Text h1

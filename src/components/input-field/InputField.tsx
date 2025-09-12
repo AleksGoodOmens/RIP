@@ -1,4 +1,6 @@
-import { forwardRef, InputHTMLAttributes, ReactElement } from 'react';
+'use client';
+
+import { forwardRef, InputHTMLAttributes, ReactElement, ReactNode } from 'react';
 
 import { Input, Label } from '@/components/ui';
 import { cn } from '@/lib/utils';
@@ -8,32 +10,38 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   helperText?: string;
   children?: ReactElement;
+  rightIcon?: ReactNode;
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ className, label, error, helperText, id, children, ...props }, ref) => {
-    const inputId = id || `input-${Math.random().toString(36)}`;
-
+  ({ className, label, error, helperText, name, children, rightIcon, ...props }, ref) => {
     return (
-      <div className="flex flex-wrap items-center gap-2 relative">
+      <div className="space-y-1">
         <Label
-          htmlFor={inputId}
+          htmlFor={name}
           className={cn('font-bold capitalize px-2', error && 'text-destructive')}
         >
           {label}
         </Label>
-        <Input
-          id={inputId}
-          className={cn(error && 'border-destructive focus:ring-destructive', className)}
-          ref={ref}
-          {...props}
-        />
+
+        <div className="relative">
+          <Input
+            className={cn('pr-10', error && 'border-destructive focus:ring-destructive', className)}
+            ref={ref}
+            id={name}
+            name={name}
+            {...props}
+          />
+          {rightIcon && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+              {rightIcon}
+            </div>
+          )}
+        </div>
+
         {children}
-        {error ? (
-          <p className="px-4 text-sm text-destructive basis-full">{error}</p>
-        ) : helperText ? (
-          <p className="px-4 text-sm text-muted-foreground basis-full">{helperText}</p>
-        ) : null}
+        {error && <p className="px-4 text-sm text-destructive">{error}</p>}
+        {helperText && <p className="px-4 text-sm text-muted-foreground">{helperText}</p>}
       </div>
     );
   }

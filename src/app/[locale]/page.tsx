@@ -1,11 +1,12 @@
-import { useTranslations } from 'next-intl';
+import { Content } from './components/Content';
 
 export default function Home() {
-  const t = useTranslations('home');
   return (
     <div>
-      <header>{t('header')}</header>
-      <main>Main</main>
+      <header>Header</header>
+      <main>
+        <Content />
+      </main>
       <footer>Footer</footer>
     </div>
   );

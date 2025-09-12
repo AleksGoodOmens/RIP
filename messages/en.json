@@ -2,6 +2,32 @@
   "home": {
     "header": "Header"
   },
+  "email": {
+    "label": "Email",
+    "placeholder": "Enter your email"
+  },
+  "password": {
+    "label": "Password",
+    "placeholder": "Enter your password"
+  },
+  "confirmPassword": {
+    "label": "Confirm Password",
+    "placeholder": "Repeat your password"
+  },
+  "button": {
+    "submit": "Register",
+    "processing": "Processing...",
+    "enter": "Enter",
+    "login": "Login",
+    "register": "Register",
+    "signout": "Sign out"
+  },
+  "login": {
+    "header": "Please, sign in"
+  },
+  "register": {
+    "header": "Please, sign up"
+  },
   "rest-client": {
     "send": "Send",
     "url-placeholder": "Enter URL or paste text"

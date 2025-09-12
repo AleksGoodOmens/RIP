@@ -1,12 +1,12 @@
+// app/[locale]/layout.tsx
 import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-
-import { LocaleSwitcher, ModeToggle, ThemeProvider } from '@/components';
+import { hasLocale } from 'next-intl';
 
 import { routing } from '@/i18n/routing';
-
 import './globals.css';
+import Providers from '@/providers/Providers';
+
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 
@@ -38,24 +38,19 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+
   const messages = (await import(`../../../messages/${locale}.json`)).default;
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <Header />
-            <main className="pt-32 grow">{children}</main>
-            <Footer />
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <Providers locale={locale} messages={messages}>
+          <Header />
+          <main className="pt-32 grow">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

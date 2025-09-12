@@ -2,6 +2,32 @@
   "home": {
     "header": "Заголовок"
   },
+  "email": {
+    "label": "Электронная почта",
+    "placeholder": "Введите адрес"
+  },
+  "password": {
+    "label": "Пароль",
+    "placeholder": "Введите пароль"
+  },
+  "confirmPassword": {
+    "label": "Подтвердите пароль",
+    "placeholder": "Повторите пароль"
+  },
+  "button": {
+    "submit": "Зарегистрироваться",
+    "processing": "Обработка...",
+    "enter": "Войти",
+    "login": "Войти",
+    "register": "Регистрация",
+    "signout": "Выйти"
+  },
+  "login": {
+    "header": "Пожалуйста, войдите"
+  },
+  "register": {
+    "header": "Пожалуйста, зарегистрируйтесь"
+  },
   "rest-client": {
     "send": "Отправить",
     "url-placeholder": "Введите URL или вставьте текст"
