@@ -9,12 +9,12 @@ export const Content = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <div>
+    <div className="grid place-content-center py-4">
       {!user && (
         <div>
           <Text as="h1" size={'xl'}>
             Welcome!
-          </Text>{' '}
+          </Text>
           <Navbar />
         </div>
       )}
