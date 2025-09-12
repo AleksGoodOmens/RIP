@@ -2,6 +2,15 @@
   "home": {
     "header": "Заголовок"
   },
+  "rest-client": {
+    "send": "Отправить",
+    "url-placeholder": "Введите URL или вставьте текст"
+  },
+  "mod": {
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Системная"
+  },
   "notFound": {
     "header": "Эта страница еще не RIP",
     "button": "Домой"

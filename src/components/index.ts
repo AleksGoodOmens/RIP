@@ -2,10 +2,14 @@ export * from './mode-toggle/ModeToggle';
 export * from './theme-provider/ThemeProvider';
 export * from './input-field/InputField';
 export * from './text/Text';
+export * from './rest-client/RestClient';
+export * from './select-method/SelectMethod';
+export * from './ui/select';
+export * from './ui/button';
+export * from './ui/input';
+export * from './local-switcher/LocalSwitcher';
 export * from './pairs-editor/PairsEditor';
 export * from './pair/Pair';
-export * from './local-switcher/LocalSwitcher';
 export * from './logo/Logo';
 export * from './burger/Burger';
 export * from './navigation/Navigation';
-

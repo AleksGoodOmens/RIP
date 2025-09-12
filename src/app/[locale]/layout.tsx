@@ -2,7 +2,8 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
-import { ThemeProvider } from '@/components';
+import { LocaleSwitcher, ModeToggle, ThemeProvider } from '@/components';
+
 import { routing } from '@/i18n/routing';
 
 import './globals.css';

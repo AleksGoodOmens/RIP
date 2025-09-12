@@ -2,6 +2,15 @@
   "home": {
     "header": "Header"
   },
+  "rest-client": {
+    "send": "Send",
+    "url-placeholder": "Enter URL or paste text"
+  },
+  "mod": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
   "notFound": {
     "header": "This page is not RIP yet",
     "button": "go home"
