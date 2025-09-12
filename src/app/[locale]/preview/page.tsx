@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import { InputField, Text } from '@/components';
 import { Button } from '@/components/ui';
 
+import { ClientPreview } from './ClientPreview';
+
 export const metadata: Metadata = {
   title: 'Preview - JustCodeIt',
 };
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 const PreviewPage = () => {
   return (
     <div className="p-4">
+            <ClientPreview />
       <div className="p-4">
         <Text size={'xl'} as={'h1'}>
           Text h1
