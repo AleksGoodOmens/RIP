@@ -1,6 +1,6 @@
 import { CircleX } from 'lucide-react';
 
-import { LocaleSwitcher, Logo, ModeToggle, Navigation } from '@/components';
+import { EnterButton, LocaleSwitcher, Logo, ModeToggle, Navigation } from '@/components';
 import { cn } from '@/lib/utils';
 
 interface Props {
@@ -24,9 +24,10 @@ export const MobileView = ({ toggleBurger, active }: Props) => {
       </header>
       <div className="grid place-content-center gap-30 h-full container mx-auto animate-pulse repeat-initial">
         <Navigation />
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <ModeToggle />
           <LocaleSwitcher />
+          <EnterButton />
         </div>
       </div>
     </div>

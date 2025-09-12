@@ -8,7 +8,7 @@ import { Button } from '../ui';
 function Navbar() {
   const t = useTranslations();
   return (
-    <nav>
+    <nav className="flex justify-center">
       <Button variant="link" asChild>
         <Link href="/authentification/login">{t('button.login')}</Link>
       </Button>

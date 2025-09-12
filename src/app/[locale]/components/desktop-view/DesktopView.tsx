@@ -1,4 +1,4 @@
-import { LocaleSwitcher, ModeToggle, Navigation } from '@/components';
+import { EnterButton, LocaleSwitcher, ModeToggle, Navigation } from '@/components';
 
 export const DesktopView = () => {
   return (
@@ -7,6 +7,7 @@ export const DesktopView = () => {
       <div className="flex items-center gap-2 justify-self-end ">
         <LocaleSwitcher />
         <ModeToggle />
+        <EnterButton />
       </div>
     </div>
   );

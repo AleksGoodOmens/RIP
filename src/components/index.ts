@@ -15,3 +15,4 @@ export * from './pair/Pair';
 export * from './logo/Logo';
 export * from './burger/Burger';
 export * from './navigation/Navigation';
+export * from './enter-button/EnterButton';
