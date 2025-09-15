@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { HighlighterResponse } from '@/components';
 
 import { getResponse } from './action';
 
@@ -12,8 +12,6 @@ export default async function RestClientPage({ params }: Props) {
   const urlBase64 = url[1];
   const headersBase64 = url[2];
 
-  console.log(url);
-
   const result = await getResponse({
     urlInBase64: urlBase64,
     method,
@@ -24,14 +22,7 @@ export default async function RestClientPage({ params }: Props) {
 
   return (
     <div>
-      <div className="mt-4">
-        <Text as={'h3'}>Response</Text>
-        <p>
-          <strong>Status:</strong> {result.status}
-        </p>
-        <h4>Body</h4>
-        <pre>{JSON.stringify(result.body, null, 2)}</pre>
-      </div>
+      <HighlighterResponse responseBody={result.body} responseStatus={result.status} />
     </div>
   );
 }

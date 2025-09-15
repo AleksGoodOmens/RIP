@@ -1,5 +1,5 @@
 'use client';
-import { ArrowDownToLine, ArrowBigDownDash, ArrowBigUpDash } from 'lucide-react';
+import { ArrowBigDownDash, ArrowBigUpDash, PlusIcon } from 'lucide-react';
 import { useCallback, useState } from 'react';
 
 import { Pair, Text } from '@/components';
@@ -76,7 +76,7 @@ export const PairsEditor = ({
             onClick={handleAddEmptyPair}
             disabled={isAddDisabled}
           >
-            <ArrowDownToLine />
+            <PlusIcon />
           </Button>
           <Button variant={isAddDisabled ? 'outline' : 'default'} onClick={handleShow}>
             {isHided ? <ArrowBigDownDash /> : <ArrowBigUpDash />}
