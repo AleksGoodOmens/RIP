@@ -1,4 +1,3 @@
-// app/[locale]/layout.tsx
 import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';

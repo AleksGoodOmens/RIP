@@ -15,13 +15,13 @@ const navLinks = [
   { href: '/preview', name: 'preview' },
 ];
 
-export const Navigation = ({ className }: Props) => {
-  const pathname = usePathname();
 
+export const Navigation = () => {
+  const activeLink = usePathname().split('/')[1];
   const t = useTranslations('navigation');
 
   const links = navLinks.map((link) => {
-    const isActive = pathname === link.href;
+    const isActive = link.href === '/' + activeLink;
     return (
       <Link
         className={cn(
