@@ -16,3 +16,4 @@ export * from './logo/Logo';
 export * from './burger/Burger';
 export * from './navigation/Navigation';
 export * from './enter-button/EnterButton';
+export * from './spinner/Spinner';
