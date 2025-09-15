@@ -1,4 +1,4 @@
-import { Text } from '@/components';
+import { HighlighterResponse } from '@/components';
 
 import { getResponse } from './action';
 
@@ -24,14 +24,10 @@ export default async function RestClientPage({ params }: Props) {
 
   return (
     <div>
-      <div className="mt-4">
-        <Text as={'h3'}>Response</Text>
-        <p>
-          <strong>Status:</strong> {result.status}
-        </p>
-        <h4>Body</h4>
-        <pre>{JSON.stringify(result.body, null, 2)}</pre>
-      </div>
+      <HighlighterResponse
+        responseBody={JSON.stringify(result.body)}
+        responseStatus={result.status}
+      />
     </div>
   );
 }
