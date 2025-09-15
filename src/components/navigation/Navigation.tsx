@@ -15,8 +15,7 @@ const navLinks = [
   { href: '/preview', name: 'preview' },
 ];
 
-
-export const Navigation = () => {
+export const Navigation = ({ className }: Props) => {
   const activeLink = usePathname().split('/')[1];
   const t = useTranslations('navigation');
 
