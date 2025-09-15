@@ -13,11 +13,12 @@ const navLinks = [
 
 export const Navigation = () => {
   const pathname = usePathname();
-
+  const arr = pathname.split('/');
+  console.log(pathname);
   const t = useTranslations('navigation');
 
   const links = navLinks.map((link) => {
-    const isActive = pathname === link.href;
+    const isActive = pathname === link.href ? true : arr.find((l) => '/' + l === link.href);
     return (
       <Link
         className={cn(
