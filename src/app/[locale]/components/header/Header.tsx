@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-import { Logo, Burger } from '@/components';
 import { usePathname } from '@/i18n/navigation';
 
 import { DesktopView } from '../desktop-view/DesktopView';
@@ -90,12 +89,8 @@ export const Header = () => {
     <header
       className={`w-full fixed bg-secondary z-50 transition-all duration-300 ${isMinimized ? 'py-0' : 'py-4'}`}
     >
-      <div className="container mx-auto flex items-center gap-4 justify-between">
-        <Logo width={isMinimized ? 50 : 96} />
-        <Burger toggleBurger={toggleBurger} active={isOpen} />
-        <MobileView toggleBurger={toggleBurger} active={isOpen} />
-        <DesktopView />
-      </div>
+      <MobileView toggleBurger={toggleBurger} active={isOpen} isMinimized={isMinimized} />
+      <DesktopView isMinimized={isMinimized} />
     </header>
   );
 };
