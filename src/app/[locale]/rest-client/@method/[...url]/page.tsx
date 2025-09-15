@@ -12,8 +12,6 @@ export default async function RestClientPage({ params }: Props) {
   const urlBase64 = url[1];
   const headersBase64 = url[2];
 
-  console.log(url);
-
   const result = await getResponse({
     urlInBase64: urlBase64,
     method,
@@ -24,10 +22,7 @@ export default async function RestClientPage({ params }: Props) {
 
   return (
     <div>
-      <HighlighterResponse
-        responseBody={JSON.stringify(result.body)}
-        responseStatus={result.status}
-      />
+      <HighlighterResponse responseBody={result.body} responseStatus={result.status} />
     </div>
   );
 }
