@@ -43,18 +43,19 @@ export const Footer = () => {
     );
   });
 
-  const year = (
-    <div className="text-2xl text-destructive font-extrabold">
-      {developmentYear} {developmentYear !== currYear && `- ${currYear}`}
-    </div>
-  );
   return (
-    <footer className="flex flex-col sm:flex-row gap-2 justify-between container mx-auto items-center py-4">
-      <Link href="https://rs.school/courses/reactjs" className="animate-pulse" target="_blank">
+    <footer className="grid md:grid-cols-3 gap-2 justify-center md:justify-between container mx-auto items-center py-4">
+      <Link
+        href="https://rs.school/courses/reactjs"
+        className="animate-pulse justify-self-center md:justify-self-auto"
+        target="_blank"
+      >
         <Image src={rssLogo} alt="RS-School" width={50} />
       </Link>
-      {year}
-      <div>
+      <div className="text-2xl text-destructive font-extrabold text-center">
+        {developmentYear} {developmentYear !== currYear && `- ${currYear}`}
+      </div>
+      <div className="justify-self-end">
         <Text align={'center'} as={'h3'} size={'md'}>
           JustCodeIt
         </Text>

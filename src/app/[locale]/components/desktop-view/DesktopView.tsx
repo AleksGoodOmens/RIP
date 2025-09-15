@@ -1,10 +1,15 @@
-import { EnterButton, LocaleSwitcher, ModeToggle, Navigation } from '@/components';
+import { EnterButton, LocaleSwitcher, Logo, ModeToggle, Navigation } from '@/components';
 
-export const DesktopView = () => {
+interface Props {
+  isMinimized: boolean;
+}
+
+export const DesktopView = ({ isMinimized }: Props) => {
   return (
-    <div className="hidden md:flex basis-2/3 gap-4 items-center justify-between">
-      <Navigation />
-      <div className="flex items-center gap-2 justify-self-end ">
+    <div className="hidden md:grid md:grid-cols-12 gap-6 items-center container mx-auto">
+      <Logo width={isMinimized ? 50 : 96} className="md:col-span-3" />
+      <Navigation className="md:col-span-6" />
+      <div className="flex items-center gap-2 justify-self-end md:col-span-3 ">
         <LocaleSwitcher />
         <ModeToggle />
         <EnterButton />
