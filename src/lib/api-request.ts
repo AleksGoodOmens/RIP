@@ -1,17 +1,14 @@
-export interface RequestResult {
-  status: number;
-  headers: Record<string, string>;
-  body: unknown;
-}
+import { RequestResult } from '@/interfaces';
 
 export async function sendUniversalRequest(
   url: string,
   method: string,
+  headers: Record<string, string>,
   body?: unknown
 ): Promise<RequestResult> {
   const options: RequestInit = {
     method,
-    headers: { 'Content-Type': 'application/json' },
+    headers,
   };
 
   if (body && ['POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS'].includes(method.toUpperCase())) {
@@ -28,14 +25,8 @@ export async function sendUniversalRequest(
     parsedBody = await response.text();
   }
 
-  const headers: Record<string, string> = {};
-  response.headers.forEach((value, key) => {
-    headers[key] = value;
-  });
-
   return {
     status: response.status,
-    headers,
     body: parsedBody,
   };
 }

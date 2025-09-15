@@ -1,10 +1,11 @@
 'use client';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { FormEvent, useState } from 'react';
 
-import { SelectMethod, Button, Input, HttpMethod } from '@/components';
-import { sendUniversalRequest, type RequestResult } from '@/lib/api-request';
+import { SelectMethod, Button, Input, HttpMethod, PairsEditor } from '@/components';
+import { IPair } from '@/interfaces';
+import { encodeTo64 } from '@/lib/utils';
 
 interface RestClientProps {
   initialMethod?: HttpMethod;
@@ -14,32 +15,23 @@ interface RestClientProps {
 export default function RestClient({ initialMethod, initialUrl }: RestClientProps) {
   const t = useTranslations('rest-client');
   const router = useRouter();
-  const pathname = usePathname();
+
   const [method] = useState(initialMethod || 'GET');
   const [url, setUrl] = useState(initialUrl || '');
-  const [result, setResult] = useState<RequestResult | null>(null);
-  const [error, setError] = useState<string | null>(null);
+
+  const [headers, setHeaders] = useState<IPair[]>([['Content-type', 'application/json']]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null);
-    setResult(null);
+    const headersObject = Object.fromEntries(headers);
 
-    try {
-      const response = await sendUniversalRequest(url, method);
-      setResult(response);
+    const apiUrlBase64 = encodeTo64(url);
+    const headersBase64 = encodeTo64(JSON.stringify(headersObject));
 
-      const encodedUrl = encodeURIComponent(btoa(url));
-
-      const locale = pathname.split('/')[1];
-      const path = `/${locale}/rest-client/${method}/${encodedUrl}`;
-      router.push(path);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message || 'Oops! Request failed');
-      }
-    }
+    router.push(`/rest-client/${method}/${apiUrlBase64}/${headersBase64}`);
   };
+
+  const isDisabled = !Boolean(url);
 
   return (
     <div>
@@ -51,23 +43,11 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
           onChange={(e) => setUrl(e.target.value)}
           placeholder={t('url-placeholder')}
         />
-        <Button type="submit">{t('send')}</Button>
+        <Button disabled={isDisabled} type="submit">
+          {t('send')}
+        </Button>
       </form>
-
-      {error && <div className="text-red-500">{error}</div>}
-
-      {result && (
-        <div className="mt-4">
-          <h3>Response</h3>
-          <p>
-            <strong>Status:</strong> {result.status}
-          </p>
-          <h4>Headers</h4>
-          <pre>{JSON.stringify(result.headers, null, 2)}</pre>
-          <h4>Body</h4>
-          <pre>{JSON.stringify(result.body, null, 2)}</pre>
-        </div>
-      )}
+      <PairsEditor title="Headers" pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
     </div>
   );
 }
