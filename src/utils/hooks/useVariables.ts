@@ -29,15 +29,20 @@ export const useVariables = (uid?: string) => {
     void loadVariables();
   }, [uid]);
 
-  const updateVariables = async (newVars: Record<string, string>) => {
-    setVariables(newVars);
+  const updateVariables = async (
+    newVars: Record<string, string>,
+    options?: { overwrite?: boolean }
+  ) => {
+    const merged = options?.overwrite ? newVars : { ...variables, ...newVars };
+
+    setVariables(merged);
     setStatus('loading');
 
     try {
       const res = await fetch(`/api/variables?uid=${uid}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newVars),
+        body: JSON.stringify(merged),
       });
 
       if (!res.ok) throw new Error(`Failed to save variables: ${res.status}`);

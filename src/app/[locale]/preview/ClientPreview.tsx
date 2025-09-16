@@ -1,7 +1,7 @@
 'use client';
 
 import { getAuth } from 'firebase/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PairsEditor } from '@/components';
 import { VariableTester } from '@/components/variable-tester/VariableTester';
@@ -10,11 +10,25 @@ import { useVariables } from '@/utils/hooks/useVariables';
 
 export const ClientPreview = () => {
   const [headers, setHeaders] = useState<IPair[]>([['ContentType', 'Application/json']]);
-  const uid = getAuth().currentUser?.uid;
+  const [variablePairs, setVariablePairs] = useState<IPair[]>([]);
 
+  const uid = getAuth().currentUser?.uid;
   const { variables, updateVariables, status } = useVariables(uid);
-  const variablePairs: IPair[] = Object.entries(variables);
-  const variableMap: Record<string, string> = Object.fromEntries(variablePairs);
+
+  useEffect(() => {
+    const filtered = Object.entries(variables).filter(
+      ([key, value]) =>
+        key.trim() !== '' && value !== undefined && value !== '' && typeof value === 'string'
+    );
+    setVariablePairs(filtered);
+  }, [variables]);
+
+  const variableMap: Record<string, string> = Object.fromEntries(
+    variablePairs.filter(
+      ([key, value]) =>
+        key.trim() !== '' && value !== undefined && value !== '' && typeof value === 'string'
+    )
+  );
 
   return (
     <div>
@@ -22,8 +36,27 @@ export const ClientPreview = () => {
       <PairsEditor
         title="Variables"
         pairs={variablePairs}
-        onPairsChange={async (pairs) => {
-          await updateVariables(Object.fromEntries(pairs));
+        onPairsChange={setVariablePairs}
+        onUpdatePair={(newPair, index) => {
+          const updatedPairs = variablePairs.map((pair, i) => (i === index ? newPair : pair));
+          setVariablePairs(updatedPairs);
+
+          const filtered = updatedPairs.filter(
+            ([key, value]) =>
+              key.trim() !== '' && value !== undefined && value !== '' && typeof value === 'string'
+          );
+
+          void updateVariables(Object.fromEntries(filtered));
+        }}
+        onRemovePair={(index) => {
+          const updatedPairs = variablePairs.filter((_, i) => i !== index);
+          setVariablePairs(updatedPairs);
+
+          const filtered = updatedPairs.filter(
+            ([key, value]) =>
+              key.trim() !== '' && value !== undefined && value !== '' && typeof value === 'string'
+          );
+          void updateVariables(Object.fromEntries(filtered), { overwrite: true });
         }}
         variables={variableMap}
       />
