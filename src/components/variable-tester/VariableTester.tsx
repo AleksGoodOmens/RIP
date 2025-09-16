@@ -3,8 +3,7 @@
 import { useState } from 'react';
 
 import { Input } from '@/components/ui';
-import { replaceVariables } from '@/lib/utils';
-import { encodeVariables } from '@/lib/variable-encoder';
+import { replaceVariables, encodeVariables } from '@/lib/variableTransform';
 
 import { HighlightVariables } from '../highlight-variables/HighlightVariables';
 
