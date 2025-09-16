@@ -34,7 +34,7 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
   const isDisabled = !Boolean(url);
 
   return (
-    <div>
+    <>
       <form className="flex gap-1" onSubmit={handleSubmit}>
         <SelectMethod name="select" value={method} onValueChange={(value) => setMethod(value)} />
         <Input
@@ -48,6 +48,6 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
         </Button>
       </form>
       <PairsEditor title="Headers" pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
-    </div>
+    </>
   );
 }

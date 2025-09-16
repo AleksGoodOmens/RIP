@@ -1,14 +1,16 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
 interface Props extends PropsWithChildren {
-  responseSection: ReactNode;
+  response: ReactNode;
+  params: Promise<{ url: string[] }>;
 }
 
-const MethodLayout = ({ children, responseSection }: Props) => {
+const MethodLayout = async ({ children, response, params }: Props) => {
+  const showResponse = (await params).url.length > 1;
   return (
     <>
       {children}
-      {responseSection}
+      {showResponse && response}
     </>
   );
 };
