@@ -3,6 +3,8 @@
 import { useState } from 'react';
 
 import { Input } from '@/components/ui';
+import { replaceVariables } from '@/lib/utils';
+import { encodeVariables } from '@/lib/variable-encoder';
 
 import { HighlightVariables } from '../highlight-variables/HighlightVariables';
 
@@ -11,30 +13,44 @@ interface VariableTesterProps {
   initial?: string;
 }
 
-const replaceVariables = (input: string, variables: Record<string, string>) => {
-  return input.replace(/{{(.*?)}}/g, (_, key) => variables[key] ?? `{{${key}}}`);
-};
-
 export const VariableTester = ({ variables, initial = '' }: VariableTesterProps) => {
   const [input, setInput] = useState(initial);
 
-  return (
-    <section className="mt-6 p-4 border rounded-xl space-y-2">
-      <label className="block font-semibold">Test line with variables</label>
-      <Input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Например: GET {{baseUrl}}/users/{{userId}}"
-      />
+  const decoded = replaceVariables(input, variables);
+  const encoded = encodeVariables(decoded, variables);
 
-      <div className="text-sm text-muted-foreground">
-        <span className="block mb-1 font-medium">Подсветка:</span>
-        <HighlightVariables input={input} variables={variables} />
+  return (
+    <section className="mt-6 p-4 border rounded-xl space-y-4 bg-card text-foreground">
+      <label className="block font-semibold text-sm">Test line with variables</label>
+
+      <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center bg-accent p-3 rounded-md">
+        <Input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Example: {{baseUrl}}/users/{{userId}}"
+          className="font-mono text-sm"
+        />
       </div>
 
-      <div className="text-sm text-green-700 font-mono">
-        <span className="block mb-1 font-medium">Result:</span>
-        {replaceVariables(input, variables)}
+      <div className="text-sm space-y-1">
+        <span className="block font-medium text-muted-foreground">Highlight:</span>
+        <div className="text-muted-foreground text-sm">
+          <HighlightVariables input={input} variables={variables} />
+        </div>
+      </div>
+
+      <div className="text-sm space-y-1">
+        <span className="block font-medium text-primary">Decoded:</span>
+        <div className="bg-card border p-2 rounded-md font-mono break-words text-muted-foreground">
+          {decoded}
+        </div>
+      </div>
+
+      <div className="text-sm space-y-1">
+        <span className="block font-medium text-primary">Encoded:</span>
+        <div className="bg-card border p-2 rounded-md font-mono break-words text-muted-foreground">
+          {encoded}
+        </div>
       </div>
     </section>
   );
