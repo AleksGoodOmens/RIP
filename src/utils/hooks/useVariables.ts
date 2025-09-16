@@ -2,27 +2,27 @@
 
 import { useEffect, useState } from 'react';
 
+type Status = 'idle' | 'loading' | 'error' | 'saved';
+
 export const useVariables = (uid?: string) => {
   const [variables, setVariables] = useState<Record<string, string>>({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [status, setStatus] = useState<Status>('idle');
 
   useEffect(() => {
     if (!uid) return;
 
     const loadVariables = async () => {
-      setLoading(true);
-      setError(null);
+      setStatus('loading');
 
       try {
         const res = await fetch(`/api/variables?uid=${uid}`);
         if (!res.ok) throw new Error(`Failed to load variables: ${res.status}`);
         const data = await res.json();
         setVariables(data);
+        setStatus('idle');
       } catch (err) {
-        setError(err instanceof Error ? err : new Error('Unknown error'));
-      } finally {
-        setLoading(false);
+        console.error('Variable load failed:', err);
+        setStatus('error');
       }
     };
 
@@ -31,18 +31,23 @@ export const useVariables = (uid?: string) => {
 
   const updateVariables = async (newVars: Record<string, string>) => {
     setVariables(newVars);
+    setStatus('loading');
 
     try {
       const res = await fetch(`/api/variables?uid=${uid}`, {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newVars),
       });
 
       if (!res.ok) throw new Error(`Failed to save variables: ${res.status}`);
+      setStatus('saved');
+      setTimeout(() => setStatus('idle'), 1500);
     } catch (err) {
       console.error('Variable update failed:', err);
+      setStatus('error');
     }
   };
 
-  return { variables, updateVariables, loading, error };
+  return { variables, updateVariables, status };
 };
