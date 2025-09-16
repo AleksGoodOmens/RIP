@@ -22,10 +22,7 @@ export default async function RestClientPage({ params }: Props) {
 
   return (
     <div>
-      <HighlighterResponse
-        responseBody={JSON.stringify(result.body)}
-        responseStatus={result.status}
-      />
+      <HighlighterResponse responseBody={result.body} responseStatus={result.status} />
     </div>
   );
 }
