@@ -9,17 +9,16 @@ interface Props {
   responseBody: string;
   responseStatus: number;
 }
-
+const statusColors: Record<number, string> = {
+  1: 'text-chart-3',
+  2: 'text-chart-2',
+  3: 'text-chart-4',
+  4: 'text-chart-5',
+  5: 'text-chart-1',
+};
 export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => {
   const { theme } = useTheme();
 
-  const statusColors: Record<number, string> = {
-    1: 'text-blue-500',
-    2: 'text-green-500',
-    3: 'text-yellow-500',
-    4: 'text-orange-500',
-    5: 'text-red-500',
-  };
   const firstDigit = Math.floor(responseStatus / 100);
   const statusColor = statusColors[firstDigit] || 'text-gray-500';
 
