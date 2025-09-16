@@ -11,12 +11,13 @@ interface Props {
 const navLinks = [
   { href: '/', name: 'home' },
   { href: '/rest-client', name: 'REST-client' },
-  { href: '/history', name: 'history' },
+  { href: '/rest-client/history', name: 'history' },
   { href: '/preview', name: 'preview' },
 ];
 
 export const Navigation = ({ className }: Props) => {
   const activeLink = usePathname().split('/')[1];
+
   const t = useTranslations('navigation');
 
   const links = navLinks.map((link) => {

@@ -16,7 +16,7 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
   const t = useTranslations('rest-client');
   const router = useRouter();
 
-  const [method] = useState(initialMethod || 'GET');
+  const [method, setMethod] = useState(initialMethod || 'GET');
   const [url, setUrl] = useState(initialUrl || '');
 
   const [headers, setHeaders] = useState<IPair[]>([['Content-type', 'application/json']]);
@@ -34,9 +34,9 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
   const isDisabled = !Boolean(url);
 
   return (
-    <div>
+    <>
       <form className="flex gap-1" onSubmit={handleSubmit}>
-        <SelectMethod name="select" value={method} />
+        <SelectMethod name="select" value={method} onValueChange={(value) => setMethod(value)} />
         <Input
           name="url-input"
           value={url}
@@ -48,6 +48,6 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
         </Button>
       </form>
       <PairsEditor title="Headers" pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
-    </div>
+    </>
   );
 }
