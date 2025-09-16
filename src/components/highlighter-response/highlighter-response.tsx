@@ -18,6 +18,7 @@ const statusColors: Record<number, string> = {
   4: 'text-chart-5',
   5: 'text-chart-1',
 };
+
 export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => {
   const { theme } = useTheme();
   const [isPrettify, setPrettify] = useState(true);
