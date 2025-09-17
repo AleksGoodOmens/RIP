@@ -17,3 +17,4 @@ export * from './burger/Burger';
 export * from './navigation/Navigation';
 export * from './enter-button/EnterButton';
 export * from './highlight-variables/HighlightVariables';
+export * from './variable-editor/VariableEditor';

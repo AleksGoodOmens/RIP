@@ -1,6 +1,6 @@
 'use client';
-import { ArrowDownToLine, ArrowBigDownDash, ArrowBigUpDash } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { ArrowBigDownDash, ArrowBigUpDash, PlusIcon } from 'lucide-react';
+import { useCallback, useState } from 'react';
 
 import { Pair, Text } from '@/components';
 import { IPair } from '@/interfaces';
@@ -11,59 +11,48 @@ import { Button } from '../ui';
 interface PairsEditorProps {
   title: string;
   pairs: IPair[];
-  variables?: Record<string, string>;
   onPairsChange: (pairs: IPair[]) => void;
   onAddPair?: () => void;
   onRemovePair?: (index: number) => void;
   onUpdatePair?: (newPair: IPair, index: number) => void;
+  variables?: Record<string, string>;
 }
 
 export const PairsEditor = ({
   title,
   pairs,
-  variables,
   onPairsChange,
   onAddPair,
   onRemovePair,
   onUpdatePair,
 }: PairsEditorProps) => {
-  const [localPairs, setLocalPairs] = useState<IPair[]>(pairs);
   const [isHided, setIsHided] = useState(false);
-
-  useEffect(() => {
-    setLocalPairs(pairs);
-  }, [pairs]);
-
   const isAddDisabled =
-    localPairs.length > 0 &&
-    localPairs[localPairs.length - 1][0] === '' &&
-    localPairs[localPairs.length - 1][1] === '';
+    pairs.length > 0 && pairs[pairs.length - 1][0] === '' && pairs[pairs.length - 1][1] === '';
 
   const handleAddEmptyPair = useCallback(() => {
-    const newPairs: IPair[] = [...localPairs, ['', '']];
-    setLocalPairs(newPairs);
+    const newPairs: IPair[] = [...pairs, ['', ''] as IPair];
+    setIsHided(false);
     onPairsChange(newPairs);
     onAddPair?.();
-  }, [localPairs, onPairsChange, onAddPair]);
+  }, [pairs, onPairsChange, onAddPair]);
 
   const handleRemovePair = useCallback(
     (index: number) => {
-      const newPairs = localPairs.filter((_, i) => i !== index);
-      setLocalPairs(newPairs);
+      const newPairs = pairs.filter((_, i) => i !== index);
       onPairsChange(newPairs);
       onRemovePair?.(index);
     },
-    [localPairs, onPairsChange, onRemovePair]
+    [pairs, onPairsChange, onRemovePair]
   );
 
   const handleUpdatePair = useCallback(
     (newPair: IPair, index: number) => {
-      const newPairs = localPairs.map((pair, i) => (i === index ? newPair : pair));
-      setLocalPairs(newPairs);
+      const newPairs = pairs.map((pair, i) => (i === index ? newPair : pair));
       onPairsChange(newPairs);
       onUpdatePair?.(newPair, index);
     },
-    [localPairs, onPairsChange, onUpdatePair]
+    [pairs, onPairsChange, onUpdatePair]
   );
 
   const handleShow = () => {
@@ -80,7 +69,7 @@ export const PairsEditor = ({
     >
       <div className="min-h-9 overflow-hidden">
         <header className="flex gap-4 mb-4">
-          <Text as="h3" variant="block-title">
+          <Text as={'h3'} variant={'block-title'}>
             {title}
           </Text>
           <Button
@@ -88,21 +77,20 @@ export const PairsEditor = ({
             onClick={handleAddEmptyPair}
             disabled={isAddDisabled}
           >
-            <ArrowDownToLine />
+            <PlusIcon />
           </Button>
           <Button variant={isAddDisabled ? 'outline' : 'default'} onClick={handleShow}>
             {isHided ? <ArrowBigDownDash /> : <ArrowBigUpDash />}
           </Button>
         </header>
         <ul>
-          {localPairs.map((pair, i) => (
+          {pairs.map((header, i) => (
             <Pair
-              key={`${i}+${pair[0]}+${pair[1]}`}
-              index={i}
-              pair={pair}
-              variables={variables ?? {}}
               handleRemovePair={handleRemovePair}
               handleUpdatePair={handleUpdatePair}
+              pair={header}
+              index={i}
+              key={`${i}+${header[0]} + ${header[1]}`}
             />
           ))}
         </ul>
