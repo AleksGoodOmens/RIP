@@ -21,3 +21,5 @@ export * from './variable-editor/VariableEditor';
 export * from './spinner/Spinner';
 export * from './highlighter-response/highlighter-response';
 export * from './code-generator/CodeGenerator';
+export * from './accordion-wrapper/AccordionWrapper';
+export * from './request-body-editor/RequestBodyEditor';

@@ -3,11 +3,17 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { FormEvent, useState } from 'react';
 
-import { SelectMethod, Button, Input, PairsEditor, CodeGenerator } from '@/components';
+import {
+  RequestBodyEditor,
+  SelectMethod,
+  Button,
+  Input,
+  PairsEditor,
+  CodeGenerator,
+  AccordionWrapper,
+} from '@/components';
 import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
-
-import RequestBodyEditor from '../request-body-editor/RequestBodyEditor';
 
 interface RestClientProps {
   initialMethod?: HttpMethod;
@@ -49,9 +55,15 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
           {t('send')}
         </Button>
       </form>
-      <PairsEditor title="Headers" pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
-      <RequestBodyEditor value={body} onChange={setBody} />
-      <CodeGenerator request={{ method, url, headers }} />
+      <AccordionWrapper title={t('titles.headers')}>
+        <PairsEditor pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
+      </AccordionWrapper>
+      <AccordionWrapper title={t('titles.body')}>
+        <RequestBodyEditor value={body} onChange={setBody} />
+      </AccordionWrapper>
+      <AccordionWrapper title={t('titles.snippets')}>
+        <CodeGenerator request={{ method, url, headers }} />
+      </AccordionWrapper>
     </>
   );
 }

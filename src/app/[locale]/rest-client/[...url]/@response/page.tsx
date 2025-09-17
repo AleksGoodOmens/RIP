@@ -1,4 +1,6 @@
-import { HighlighterResponse } from '@/components';
+import { getTranslations } from 'next-intl/server';
+
+import { AccordionWrapper, HighlighterResponse } from '@/components';
 
 import { getResponse } from '../action';
 
@@ -15,6 +17,8 @@ export default async function RestClientPage({ params }: Props) {
   const headersBase64 = url[2];
   const bodyBase64 = url[3] ? url[3] : '';
 
+  const t = await getTranslations('rest-client.titles');
+
   const result = await getResponse({
     urlInBase64: urlBase64,
     method,
@@ -25,8 +29,8 @@ export default async function RestClientPage({ params }: Props) {
   if (!result) return <div>Unexpected error</div>;
 
   return (
-    <div>
+    <AccordionWrapper title={t('response')}>
       <HighlighterResponse responseBody={result.body} responseStatus={result.status} />
-    </div>
+    </AccordionWrapper>
   );
 }

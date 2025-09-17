@@ -28,9 +28,11 @@ export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => 
 
   const handlePrettify = () => {
     setPrettify((pret) => {
-      setValue((oldValue) =>
-        pret ? JSON.stringify(JSON.parse(oldValue)) : JSON.stringify(JSON.parse(oldValue), null, 2)
-      );
+      setValue((oldValue) => {
+        const ugly = JSON.stringify(JSON.parse(oldValue));
+        const pretty = JSON.stringify(JSON.parse(oldValue), null, 2);
+        return pret ? ugly : pretty;
+      });
       return !pret;
     });
   };
@@ -39,22 +41,19 @@ export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => 
   const statusColor = statusColors[firstDigit] || 'text-gray-500';
 
   return (
-    <div className="flex p-2 flex-col border-2 border-destructive rounded-2xl">
-      <div className="flex gap-4">
-        <Text as={'h3'} variant={'block-title'}>
-          Response
-        </Text>
+    <div>
+      <header className="flex gap-4">
         <Button aria-label="make code pretty" variant={'secondary'} onClick={handlePrettify}>
           {isPrettify ? <Braces /> : <TypeOutline />}
         </Button>
-      </div>
+      </header>
       <div className="flex gap-2">
         <Text size="xs">Status:</Text>
         <Text className={statusColor} size="xs">
           {responseStatus}
         </Text>
       </div>
-      <div className="border-2 rounded-2xl overflow-hidden">
+      <div className="border-2 rounded-2xl overflow-hidden text-xs">
         <SyntaxHighlighter
           showLineNumbers
           language="json"

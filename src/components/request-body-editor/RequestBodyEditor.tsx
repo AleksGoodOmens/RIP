@@ -5,17 +5,14 @@ import 'prismjs/components/prism-json';
 import 'prismjs/themes/prism-tomorrow.css';
 import Editor from 'react-simple-code-editor';
 
-import { Text } from '@/components';
-
 interface Props {
   value: string;
   onChange: (value: string) => void;
 }
 
-export default function RequestBodyEditor({ value, onChange }: Props) {
+export function RequestBodyEditor({ value, onChange }: Props) {
   return (
     <div className="border-2 border-destructive rounded-2xl p-4 dark:bg-[#1d1f21]">
-      <Text variant={'block-title'}>Body editor</Text>
       <Editor
         value={value}
         onValueChange={onChange}
