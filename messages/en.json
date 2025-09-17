@@ -47,6 +47,13 @@
     "preview": "preview",
     "history": "history"
   },
+  "code-generator": {
+    "title": "Code Snippets",
+    "messages": {
+      "error": "Failed to generate snippet",
+      "default": "make an request"
+    }
+  },
   "history": {
     "title": "Requests History",
     "emptyMessage": "You haven't executed any requests! <block>It's empty here. Try:</block>"

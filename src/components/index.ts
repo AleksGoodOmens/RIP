@@ -20,3 +20,4 @@ export * from './highlight-variables/HighlightVariables';
 export * from './variable-editor/VariableEditor';
 export * from './spinner/Spinner';
 export * from './highlighter-response/highlighter-response';
+export * from './code-generator/CodeGenerator';

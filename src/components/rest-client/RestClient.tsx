@@ -3,8 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { FormEvent, useState } from 'react';
 
-import { SelectMethod, Button, Input, HttpMethod, PairsEditor } from '@/components';
-import { IPair } from '@/interfaces';
+import { SelectMethod, Button, Input, PairsEditor, CodeGenerator } from '@/components';
+import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
 
 interface RestClientProps {
@@ -48,6 +48,7 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
         </Button>
       </form>
       <PairsEditor title="Headers" pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
+      <CodeGenerator request={{ method, url, headers }} />
     </>
   );
 }
