@@ -18,3 +18,4 @@ export * from './navigation/Navigation';
 export * from './enter-button/EnterButton';
 export * from './spinner/Spinner';
 export * from './highlighter-response/highlighter-response';
+export * from './code-generator/CodeGenerator';

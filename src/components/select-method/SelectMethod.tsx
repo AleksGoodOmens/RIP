@@ -1,9 +1,6 @@
 'use client';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components';
-
-export const METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'] as const;
-
-export type HttpMethod = (typeof METHODS)[number];
+import { HttpMethod, METHODS } from '@/interfaces';
 
 interface SelectMethodProps {
   value?: HttpMethod;

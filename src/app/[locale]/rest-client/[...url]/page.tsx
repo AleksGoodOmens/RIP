@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { HttpMethod } from '@/components';
+import { HttpMethod } from '@/interfaces';
 import { decodeToString } from '@/lib/utils';
 
 interface Props {
