@@ -1,6 +1,6 @@
 {
   "home": {
-    "header": "Header"
+    "greetings": "Welcome"
   },
   "email": {
     "label": "Email",
