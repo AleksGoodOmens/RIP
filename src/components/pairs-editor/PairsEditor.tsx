@@ -15,6 +15,7 @@ interface PairsEditorProps {
   onAddPair?: () => void;
   onRemovePair?: (index: number) => void;
   onUpdatePair?: (newPair: IPair, index: number) => void;
+  variables?: Record<string, string>;
 }
 
 export const PairsEditor = ({

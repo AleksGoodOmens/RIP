@@ -47,7 +47,7 @@ export default async function RootLayout({
       >
         <Providers locale={locale} messages={messages}>
           <Header />
-          <main className="pt-32 grow fadeIn-children">{children}</main>
+          <main className="pt-32 grow fadeIn-children container mx-auto">{children}</main>
           <Footer />
         </Providers>
       </body>

@@ -1,6 +1,6 @@
 import { HighlighterResponse } from '@/components';
 
-import { getResponse } from './action';
+import { getResponse } from '../action';
 
 interface Props {
   params: Promise<{

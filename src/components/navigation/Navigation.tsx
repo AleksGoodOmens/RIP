@@ -11,16 +11,28 @@ interface Props {
 const navLinks = [
   { href: '/', name: 'home' },
   { href: '/rest-client', name: 'REST-client' },
-  { href: '/history', name: 'history' },
+  { href: '/rest-client/history', name: 'history' },
   { href: '/preview', name: 'preview' },
 ];
 
 export const Navigation = ({ className }: Props) => {
-  const activeLink = usePathname().split('/')[1];
+  const activeLink = usePathname();
+
   const t = useTranslations('navigation');
 
+  const getIsActive = (href: string) => {
+    if (href === '/rest-client') {
+      return activeLink.startsWith('/rest-client') && activeLink !== '/rest-client/history';
+    }
+    if (href === '/rest-client/history') {
+      return activeLink === '/rest-client/history';
+    }
+    return activeLink === href;
+  };
+
   const links = navLinks.map((link) => {
-    const isActive = link.href === '/' + activeLink;
+    const isActive = getIsActive(link.href);
+
     return (
       <Link
         className={cn(

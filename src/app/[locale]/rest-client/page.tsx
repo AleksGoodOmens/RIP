@@ -1,9 +1,6 @@
-import dynamic from 'next/dynamic';
+import { redirect } from 'next/navigation';
 
-const RestClient = dynamic(() => import('@/components/rest-client/RestClient'), {
-  loading: () => <p>Loading REST Client...</p>,
-});
-
-export default function RestClientPage() {
-  return <RestClient />;
-}
+const RestClientPage = () => {
+  redirect('/rest-client/GET');
+};
+export default RestClientPage;
