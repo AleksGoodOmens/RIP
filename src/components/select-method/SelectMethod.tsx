@@ -1,14 +1,14 @@
 'use client';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components';
 
-const METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'] as const;
+export const METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'] as const;
 
-type MethodProps = (typeof METHODS)[number];
+export type HttpMethod = (typeof METHODS)[number];
 
 interface SelectMethodProps {
-  value?: MethodProps;
-  defaultValue?: MethodProps;
-  onValueChange?: (value: MethodProps) => void;
+  value?: HttpMethod;
+  defaultValue?: HttpMethod;
+  onValueChange?: (value: HttpMethod) => void;
   className?: string;
   name: string;
 }

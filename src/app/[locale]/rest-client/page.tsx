@@ -1,9 +1,6 @@
-import { RestClient } from '@/components';
+import { redirect } from 'next/navigation';
 
-export default function RestClientPage() {
-  return (
-    <div>
-      <RestClient />
-    </div>
-  );
-}
+const RestClientPage = () => {
+  redirect('/rest-client/GET');
+};
+export default RestClientPage;

@@ -1,4 +1,3 @@
-// app/[locale]/layout.tsx
 import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
@@ -44,11 +43,11 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh overflow-y-scroll`}
       >
         <Providers locale={locale} messages={messages}>
           <Header />
-          <main className="pt-32 grow">{children}</main>
+          <main className="pt-32 grow fadeIn-children container mx-auto">{children}</main>
           <Footer />
         </Providers>
       </body>

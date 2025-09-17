@@ -37,7 +37,6 @@ export default function RegisterForm() {
     reset();
   };
 
-  console.log(errors.email?.message);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-1">

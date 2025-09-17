@@ -24,5 +24,5 @@ export async function loginAction(formData: FormData): Promise<FormActionResult>
     return { success: false, fieldErrors: { [field]: message } };
   }
 
-  redirect('/home');
+  redirect('/');
 }
