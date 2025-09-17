@@ -46,5 +46,9 @@
     "REST-client": "REST-client",
     "preview": "preview",
     "history": "history"
+  },
+  "history": {
+    "title": "Requests History",
+    "emptyMessage": "You haven't executed any requests! <block>It's empty here. Try:</block>"
   }
 }
