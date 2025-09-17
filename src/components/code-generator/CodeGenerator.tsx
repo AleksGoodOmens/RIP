@@ -111,10 +111,10 @@ export const CodeGenerator = ({ request }: Props) => {
         </Text>
 
         <Select value={language.name} onValueChange={handleChangeLanguage}>
-          <SelectTrigger className="w-48">
+          <SelectTrigger aria-label="snippet language" className="w-48">
             <SelectValue placeholder={language.id} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent aria-label="select snippet language">
             {languages.map((lang) => (
               <SelectItem key={lang.name} value={lang.name}>
                 {lang.name}
