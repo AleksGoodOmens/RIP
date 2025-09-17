@@ -1,9 +1,9 @@
 'use client';
-import { Sun, CloudOff } from 'lucide-react';
+import { TypeOutline, Braces } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { Button, Text } from '@/components';
 
@@ -45,7 +45,7 @@ export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => 
           Response
         </Text>
         <Button variant={'secondary'} onClick={handlePrettify}>
-          {isPrettify ? <Sun /> : <CloudOff />}
+          {isPrettify ? <Braces /> : <TypeOutline />}
         </Button>
       </div>
       <div className="flex gap-2">
@@ -55,7 +55,12 @@ export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => 
         </Text>
       </div>
       <div className="border-2 rounded-2xl overflow-hidden">
-        <SyntaxHighlighter language="json" style={theme === 'dark' ? atomOneDark : atomOneLight}>
+        <SyntaxHighlighter
+          showLineNumbers
+          language="json"
+          style={theme === 'dark' ? atomDark : oneLight}
+          customStyle={{ margin: '0' }}
+        >
           {value}
         </SyntaxHighlighter>
       </div>
