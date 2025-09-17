@@ -85,10 +85,14 @@ export const Pair = memo(({ pair, handleRemovePair, handleUpdatePair, index }: P
         />
       </div>
       <div className="grid gap-1 sm:grid-cols-2">
-        <Button variant={'destructive'} onClick={handleRemove}>
+        <Button aria-label="delete" variant={'destructive'} onClick={handleRemove}>
           <Trash2 />
         </Button>
-        <Button onClick={handleEdit} variant={isEditable ? 'secondary' : 'default'}>
+        <Button
+          aria-label={isEditable ? 'edit' : 'save'}
+          onClick={handleEdit}
+          variant={isEditable ? 'secondary' : 'default'}
+        >
           {isEditable ? <Pencil /> : <Save />}
         </Button>
       </div>

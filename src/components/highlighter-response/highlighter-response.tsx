@@ -44,7 +44,7 @@ export const HighlighterResponse = ({ responseBody, responseStatus }: Props) => 
         <Text as={'h3'} variant={'block-title'}>
           Response
         </Text>
-        <Button variant={'secondary'} onClick={handlePrettify}>
+        <Button aria-label="make code pretty" variant={'secondary'} onClick={handlePrettify}>
           {isPrettify ? <Braces /> : <TypeOutline />}
         </Button>
       </div>

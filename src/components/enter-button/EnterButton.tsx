@@ -14,7 +14,7 @@ export const EnterButton = () => {
   return (
     <>
       {user && (
-        <Button variant={'destructive'} onClick={doSignOut}>
+        <Button aria-label="logout" variant={'destructive'} onClick={doSignOut}>
           <LogOut />
         </Button>
       )}

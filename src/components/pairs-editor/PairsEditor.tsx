@@ -73,13 +73,18 @@ export const PairsEditor = ({
             {title}
           </Text>
           <Button
+            aria-label="add"
             variant={isAddDisabled ? 'outline' : 'default'}
             onClick={handleAddEmptyPair}
             disabled={isAddDisabled}
           >
             <PlusIcon />
           </Button>
-          <Button variant={isAddDisabled ? 'outline' : 'default'} onClick={handleShow}>
+          <Button
+            aria-label={isHided ? 'show' : 'hide'}
+            variant={isAddDisabled ? 'outline' : 'default'}
+            onClick={handleShow}
+          >
             {isHided ? <ArrowBigDownDash /> : <ArrowBigUpDash />}
           </Button>
         </header>
