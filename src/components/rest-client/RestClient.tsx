@@ -3,7 +3,15 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { FormEvent, useState } from 'react';
 
-import { SelectMethod, Button, Input, PairsEditor, CodeGenerator } from '@/components';
+import {
+  RequestBodyEditor,
+  SelectMethod,
+  Button,
+  Input,
+  PairsEditor,
+  CodeGenerator,
+  AccordionWrapper,
+} from '@/components';
 import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
 
@@ -18,17 +26,17 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
 
   const [method, setMethod] = useState(initialMethod || 'GET');
   const [url, setUrl] = useState(initialUrl || '');
-
   const [headers, setHeaders] = useState<IPair[]>([['Content-type', 'application/json']]);
+  const [body, setBody] = useState('');
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const headersObject = Object.fromEntries(headers);
-
     const apiUrlBase64 = encodeTo64(url);
     const headersBase64 = encodeTo64(JSON.stringify(headersObject));
+    const bodyBase64 = body ? encodeTo64(body) : '';
 
-    router.push(`/rest-client/${method}/${apiUrlBase64}/${headersBase64}`);
+    router.push(`/rest-client/${method}/${apiUrlBase64}/${headersBase64}/${bodyBase64}`);
   };
 
   const isDisabled = !Boolean(url);
@@ -47,8 +55,15 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
           {t('send')}
         </Button>
       </form>
-      <PairsEditor title="Headers" pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
-      <CodeGenerator request={{ method, url, headers }} />
+      <AccordionWrapper title={t('titles.headers')}>
+        <PairsEditor pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
+      </AccordionWrapper>
+      <AccordionWrapper title={t('titles.body')}>
+        <RequestBodyEditor value={body} onChange={setBody} />
+      </AccordionWrapper>
+      <AccordionWrapper title={t('titles.snippets')}>
+        <CodeGenerator request={{ method, url, headers }} />
+      </AccordionWrapper>
     </>
   );
 }

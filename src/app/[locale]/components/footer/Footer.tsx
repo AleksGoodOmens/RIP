@@ -56,7 +56,7 @@ export const Footer = () => {
         {developmentYear} {developmentYear !== currYear && `- ${currYear}`}
       </div>
       <div className="justify-self-end">
-        <Text align={'center'} as={'h3'} size={'md'}>
+        <Text align={'center'} as={'h2'} size={'md'}>
           JustCodeIt
         </Text>
         <nav className="flex gap-4 mt-2">{developersLinks}</nav>

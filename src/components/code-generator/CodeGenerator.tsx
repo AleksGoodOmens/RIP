@@ -104,17 +104,13 @@ export const CodeGenerator = ({ request }: Props) => {
   };
 
   return (
-    <section className="border-2 border-destructive rounded-2xl p-4">
+    <>
       <header className="flex gap-4 items-center">
-        <Text as={'h3'} variant={'block-title'}>
-          {t('title')}
-        </Text>
-
         <Select value={language.name} onValueChange={handleChangeLanguage}>
-          <SelectTrigger className="w-48">
+          <SelectTrigger aria-label="snippet language" className="w-48">
             <SelectValue placeholder={language.id} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent aria-label="select snippet language">
             {languages.map((lang) => (
               <SelectItem key={lang.name} value={lang.name}>
                 {lang.name}
@@ -133,6 +129,8 @@ export const CodeGenerator = ({ request }: Props) => {
       {snippet && (
         <div className="rounded-2xl overflow-hidden text-xs">
           <SyntaxHighlighter
+            showLineNumbers
+            customStyle={{ padding: '1rem' }}
             style={theme === 'dark' ? atomOneDark : atomOneLight}
             language={language.id}
           >
@@ -140,6 +138,6 @@ export const CodeGenerator = ({ request }: Props) => {
           </SyntaxHighlighter>
         </div>
       )}
-    </section>
+    </>
   );
 };

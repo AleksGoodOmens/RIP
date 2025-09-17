@@ -1,6 +1,6 @@
 {
   "home": {
-    "header": "Header"
+    "greetings": "Welcome"
   },
   "email": {
     "label": "Email",
@@ -30,7 +30,13 @@
   },
   "rest-client": {
     "send": "Send",
-    "url-placeholder": "Enter URL or paste text"
+    "url-placeholder": "Enter URL or paste text",
+    "titles": {
+      "snippets": "Code Snippets",
+      "headers": "Headers editor",
+      "body": "Body editor",
+      "response": "Server response"
+    }
   },
   "mod": {
     "light": "Light",
@@ -48,7 +54,6 @@
     "history": "history"
   },
   "code-generator": {
-    "title": "Code Snippets",
     "messages": {
       "error": "Failed to generate snippet",
       "default": "make an request"

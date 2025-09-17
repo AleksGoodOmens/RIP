@@ -12,7 +12,7 @@ const HistoryPage = async () => {
       </Text>
       <Text align={'center'} className="py-10">
         {t.rich('emptyMessage', {
-          block: (chunks) => <div>{chunks}</div>,
+          block: (chunks) => <span className="block">{chunks}</span>,
         })}
       </Text>
       <Button className="mx-auto block w-fit" variant={'link'} asChild>

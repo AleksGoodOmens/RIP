@@ -24,7 +24,7 @@ export const MobileView = ({ toggleBurger, active, isMinimized }: Props) => {
       >
         <header className="flex justify-between items-center  container mx-auto animate-pulse repeat-initial py-2">
           <Logo width={75} />
-          <button onClick={toggleBurger} className="p-4">
+          <button aria-label="toggle burger" onClick={toggleBurger} className="p-4">
             <CircleX />
           </button>
         </header>

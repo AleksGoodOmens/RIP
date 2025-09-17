@@ -16,7 +16,11 @@ export function LocaleSwitcher() {
   };
 
   return (
-    <select value={locale} onChange={(e) => changeLocale(e.target.value)}>
+    <select
+      aria-label="select language"
+      value={locale}
+      onChange={(e) => changeLocale(e.target.value)}
+    >
       <option value="en">EN</option>
       <option value="ru">RU</option>
     </select>
