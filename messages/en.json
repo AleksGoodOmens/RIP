@@ -35,7 +35,8 @@
       "snippets": "Code Snippets",
       "headers": "Headers editor",
       "body": "Body editor",
-      "response": "Server response"
+      "response": "Server response",
+      "variables": "User variables"
     }
   },
   "mod": {
