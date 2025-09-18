@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import {
   RequestBodyEditor,
@@ -28,6 +28,13 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
   const [url, setUrl] = useState(initialUrl || '');
   const [headers, setHeaders] = useState<IPair[]>([['Content-type', 'application/json']]);
   const [body, setBody] = useState('');
+  const [variables, setVariables] = useState<IPair[]>(() =>
+    JSON.parse(localStorage.getItem('variables') || '[]')
+  );
+
+  useEffect(() => {
+    localStorage.setItem('variables', JSON.stringify(variables));
+  }, [variables]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,8 +62,11 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
           {t('send')}
         </Button>
       </form>
+      <AccordionWrapper title={t('titles.variables')}>
+        <PairsEditor pairs={variables} onPairsChange={setVariables} />
+      </AccordionWrapper>
       <AccordionWrapper title={t('titles.headers')}>
-        <PairsEditor pairs={headers} onPairsChange={(pairs) => setHeaders(pairs)} />
+        <PairsEditor pairs={headers} onPairsChange={setHeaders} />
       </AccordionWrapper>
       <AccordionWrapper title={t('titles.body')}>
         <RequestBodyEditor value={body} onChange={setBody} />

@@ -35,9 +35,10 @@
       "snippets": "Code Snippets",
       "headers": "Headers editor",
       "body": "Body editor",
-      "response": "Server response"
+      "response": "Server response",
+      "variables": "User variables"
     },
-    "body-editor-placeholder": "Enter request body (JSON or plain text)..."
+   "body-editor-placeholder": "Enter request body (JSON or plain text)..."
   },
   "mod": {
     "light": "Light",
