@@ -1,5 +1,6 @@
 'use client';
 import { Braces, TypeOutline } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-json';
@@ -26,6 +27,8 @@ const isValidJSON = (str: string) => {
 export function RequestBodyEditor({ value, onChange }: Props) {
   const [isPrettify, setPrettify] = useState(false);
   const isInternalChange = useRef(false);
+
+  const t = useTranslations('rest-client');
 
   const handlePrettify = () => {
     if (isValidJSON(value)) {
@@ -71,7 +74,7 @@ export function RequestBodyEditor({ value, onChange }: Props) {
             }
           }}
           padding={8}
-          placeholder="Enter request body (JSON or plain text)..."
+          placeholder={t('body-editor-placeholder')}
           style={{
             width: '100%',
             borderRadius: '16px',
