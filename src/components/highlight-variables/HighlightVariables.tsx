@@ -18,7 +18,7 @@ const HighlightVariables = ({ input, variables }: HighlightVariablesProps) => {
         const exists = key in variables;
 
         return (
-          <span key={i} className={cn(exists ? ' text-green-800' : 'text-destructive')}>
+          <span key={i} className={cn(exists ? ' text-chart-2' : 'text-destructive')}>
             {part}
           </span>
         );
