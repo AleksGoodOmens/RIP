@@ -36,7 +36,8 @@
       "headers": "Headers editor",
       "body": "Body editor",
       "response": "Server response"
-    }
+    },
+    "body-editor-placeholder": "Enter request body (JSON or plain text)..."
   },
   "mod": {
     "light": "Light",

@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-json';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export function RequestBodyEditor({ value, onChange }: Props) {
+  const t = useTranslations('rest-client');
   return (
     <div className="border-2 border-destructive rounded-2xl p-4 dark:bg-[#1d1f21]">
       <Editor
@@ -18,7 +20,7 @@ export function RequestBodyEditor({ value, onChange }: Props) {
         onValueChange={onChange}
         highlight={(code) => highlight(code, languages.json, 'json')}
         padding={8}
-        placeholder="Enter request body (JSON or plain text)..."
+        placeholder={t('body-editor-placeholder')}
         style={{
           fontFamily: '"Fira Code", "Monaco", "Consolas", monospace',
           fontSize: 14,
