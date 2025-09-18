@@ -14,23 +14,29 @@ import {
 } from '@/components';
 import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
+import { encodeVariables, replaceVariables } from '@/lib/variableTransform';
 
 interface RestClientProps {
   initialMethod?: HttpMethod;
   initialUrl?: string;
+  initialBody?: string;
 }
 
-export default function RestClient({ initialMethod, initialUrl }: RestClientProps) {
+export default function RestClient({
+  initialMethod,
+  initialUrl,
+  initialBody = '',
+}: RestClientProps) {
   const t = useTranslations('rest-client');
   const router = useRouter();
 
   const [method, setMethod] = useState(initialMethod || 'GET');
-  const [url, setUrl] = useState(initialUrl || '');
-  const [headers, setHeaders] = useState<IPair[]>([['Content-type', 'application/json']]);
-  const [body, setBody] = useState('');
   const [variables, setVariables] = useState<IPair[]>(() =>
     JSON.parse(localStorage.getItem('variables') || '[]')
   );
+  const [url, setUrl] = useState(encodeVariables(initialUrl || '', Object.fromEntries(variables)));
+  const [headers, setHeaders] = useState<IPair[]>([['Content-type', 'application/json']]);
+  const [body, setBody] = useState(initialBody);
 
   useEffect(() => {
     localStorage.setItem('variables', JSON.stringify(variables));
@@ -39,7 +45,7 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const headersObject = Object.fromEntries(headers);
-    const apiUrlBase64 = encodeTo64(url);
+    const apiUrlBase64 = encodeTo64(replaceVariables(url, Object.fromEntries(variables)));
     const headersBase64 = encodeTo64(JSON.stringify(headersObject));
     const bodyBase64 = body ? encodeTo64(body) : '';
 
@@ -51,7 +57,7 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
   return (
     <>
       <form className="flex gap-1" onSubmit={handleSubmit}>
-        <SelectMethod name="select" value={method} onValueChange={(value) => setMethod(value)} />
+        <SelectMethod name="select" value={method} onValueChange={setMethod} />
         <Input
           name="url-input"
           value={url}
@@ -62,18 +68,20 @@ export default function RestClient({ initialMethod, initialUrl }: RestClientProp
           {t('send')}
         </Button>
       </form>
-      <AccordionWrapper title={t('titles.variables')}>
-        <PairsEditor pairs={variables} onPairsChange={setVariables} />
-      </AccordionWrapper>
-      <AccordionWrapper title={t('titles.headers')}>
-        <PairsEditor pairs={headers} onPairsChange={setHeaders} />
-      </AccordionWrapper>
-      <AccordionWrapper title={t('titles.body')}>
-        <RequestBodyEditor value={body} onChange={setBody} />
-      </AccordionWrapper>
-      <AccordionWrapper title={t('titles.snippets')}>
-        <CodeGenerator request={{ method, url, headers }} />
-      </AccordionWrapper>
+      <section className="grid sm:grid-cols-2 items-start gap-4 my-4">
+        <AccordionWrapper title={t('titles.variables')}>
+          <PairsEditor pairs={variables} onPairsChange={setVariables} />
+        </AccordionWrapper>
+        <AccordionWrapper title={t('titles.headers')}>
+          <PairsEditor pairs={headers} onPairsChange={setHeaders} />
+        </AccordionWrapper>
+        <AccordionWrapper title={t('titles.body')}>
+          <RequestBodyEditor value={body} onChange={setBody} />
+        </AccordionWrapper>
+        <AccordionWrapper title={t('titles.snippets')}>
+          <CodeGenerator request={{ method, url, headers, body }} />
+        </AccordionWrapper>
+      </section>
     </>
   );
 }

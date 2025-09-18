@@ -12,9 +12,15 @@ const RestClient = dynamic(() => import('@/components/rest-client/RestClient'), 
 });
 
 export default async function RestClientPage({ params }: Props) {
-  const initialMethod = (await params).url[0] as HttpMethod;
-  const urlBase64: string | undefined = (await params).url[1];
+  const { url } = await params;
+  const urlBase64: string | undefined = url[1];
+  const bodyBase64: string | undefined = url[3];
 
+  const initialMethod = url[0] as HttpMethod;
   const initialUrl = urlBase64 ? decodeToString(urlBase64) : '';
-  return <RestClient initialMethod={initialMethod} initialUrl={initialUrl} />;
+  const initialBody = bodyBase64 ? decodeToString(bodyBase64) : '';
+
+  return (
+    <RestClient initialMethod={initialMethod} initialUrl={initialUrl} initialBody={initialBody} />
+  );
 }

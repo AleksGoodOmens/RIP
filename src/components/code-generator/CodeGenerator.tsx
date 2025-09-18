@@ -6,18 +6,14 @@ import React, { useState, useEffect } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-import { HttpMethod, IPair } from '@/interfaces';
+import { IRequestSnippetGenerator } from '@/interfaces';
+import { generateHarRequest } from '@/lib/utils';
 
 import { Text } from '../text/Text';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 interface Props {
-  request: {
-    method: HttpMethod;
-    headers: IPair[];
-    body?: string;
-    url: string;
-  };
+  request: IRequestSnippetGenerator;
 }
 
 interface language {
@@ -61,26 +57,7 @@ export const CodeGenerator = ({ request }: Props) => {
       }
 
       try {
-        const harRequest = {
-          method: request.method.toUpperCase(),
-          url: request.url,
-          httpVersion: 'HTTP/1.1',
-          cookies: [],
-          headers: request.headers.map(([name, value]) => ({
-            name,
-            value,
-          })),
-          queryString: [],
-          headersSize: -1,
-          bodySize: -1,
-          postData: request.body
-            ? {
-                mimeType: 'application/json',
-                text: request.body,
-                params: [],
-              }
-            : undefined,
-        };
+        const harRequest = generateHarRequest(request);
 
         const snippet = new HTTPSnippet(harRequest);
         const target = language.id;
@@ -105,7 +82,7 @@ export const CodeGenerator = ({ request }: Props) => {
 
   return (
     <>
-      <header className="flex gap-4 items-center">
+      <section className="flex gap-4 items-center mb-4">
         <Select value={language.name} onValueChange={handleChangeLanguage}>
           <SelectTrigger aria-label="snippet language" className="w-48">
             <SelectValue placeholder={language.id} />
@@ -118,7 +95,7 @@ export const CodeGenerator = ({ request }: Props) => {
             ))}
           </SelectContent>
         </Select>
-      </header>
+      </section>
       {error && <Text className="text-destructive">{error}</Text>}
 
       {!snippet && (

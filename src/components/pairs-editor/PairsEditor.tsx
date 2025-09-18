@@ -52,14 +52,16 @@ export const PairsEditor = ({
 
   return (
     <>
-      <Button
-        aria-label="add"
-        variant={isAddDisabled ? 'outline' : 'default'}
-        onClick={handleAddEmptyPair}
-        disabled={isAddDisabled}
-      >
-        <PlusIcon />
-      </Button>
+      <section className="mb-4">
+        <Button
+          aria-label="add"
+          variant={isAddDisabled ? 'outline' : 'default'}
+          onClick={handleAddEmptyPair}
+          disabled={isAddDisabled}
+        >
+          <PlusIcon />
+        </Button>
+      </section>
       <ul>
         {pairs.map((header, i) => (
           <Pair
