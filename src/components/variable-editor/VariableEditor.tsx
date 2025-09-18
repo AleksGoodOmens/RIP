@@ -9,7 +9,6 @@ const VariableEditor = () => {
   return (
     <>
       <PairsEditor
-        title="Variables"
         pairs={variablePairs}
         onPairsChange={setVariablePairs}
         onUpdatePair={updatePair}

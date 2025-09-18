@@ -7,7 +7,6 @@ import {
   RequestBodyEditor,
   SelectMethod,
   Button,
-  Input,
   PairsEditor,
   CodeGenerator,
   AccordionWrapper,
@@ -15,6 +14,8 @@ import {
 import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
 import { encodeVariables, replaceVariables } from '@/lib/variableTransform';
+
+import { HighlightedUrl } from '../highlighted-url/HighlightedUrl';
 
 interface RestClientProps {
   initialMethod?: HttpMethod;
@@ -58,11 +59,12 @@ export default function RestClient({
     <>
       <form className="flex gap-1" onSubmit={handleSubmit}>
         <SelectMethod name="select" value={method} onValueChange={setMethod} />
-        <Input
+        <HighlightedUrl
           name="url-input"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder={t('url-placeholder')}
+          variables={Object.fromEntries(variables)}
         />
         <Button disabled={isDisabled} type="submit">
           {t('send')}
