@@ -62,7 +62,7 @@ export default function RestClient({
         <HighlightedUrl
           name="url-input"
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => setUrl(e.target.value.trimStart())}
           placeholder={t('url-placeholder')}
           variables={Object.fromEntries(variables)}
         />
