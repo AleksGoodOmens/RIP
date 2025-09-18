@@ -7,7 +7,7 @@ const HistoryPage = async () => {
   const t = await getTranslations('history');
   return (
     <section>
-      <Text as={'h1'} size={'xl'} className="py-6">
+      <Text as={'h1'} variant={'main-title'}>
         {t('title')}
       </Text>
       <Text align={'center'} className="py-10">

@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic';
+import { getTranslations } from 'next-intl/server';
 
+import { Text } from '@/components';
 import { HttpMethod } from '@/interfaces';
 import { decodeToString } from '@/lib/utils';
 
@@ -16,11 +18,18 @@ export default async function RestClientPage({ params }: Props) {
   const urlBase64: string | undefined = url[1];
   const bodyBase64: string | undefined = url[3];
 
+  const t = await getTranslations('rest-client.titles');
+
   const initialMethod = url[0] as HttpMethod;
   const initialUrl = urlBase64 ? decodeToString(urlBase64) : '';
   const initialBody = bodyBase64 ? decodeToString(bodyBase64) : '';
 
   return (
-    <RestClient initialMethod={initialMethod} initialUrl={initialUrl} initialBody={initialBody} />
+    <section>
+      <Text as="h1" variant={'main-title'}>
+        {t('main')}
+      </Text>
+      <RestClient initialMethod={initialMethod} initialUrl={initialUrl} initialBody={initialBody} />
+    </section>
   );
 }

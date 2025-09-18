@@ -14,7 +14,7 @@ export const Content = () => {
     <div className="grid place-content-center py-4">
       {!user && (
         <div>
-          <Text as="h1" size={'xl'}>
+          <Text as="h1" variant={'main-title'}>
             {t('greetings')}!
           </Text>
           <Navbar />
@@ -22,7 +22,7 @@ export const Content = () => {
       )}
 
       {user && (
-        <Text as="h1" size={'xl'}>
+        <Text as="h1" variant={'main-title'}>
           {t('greetings')} {user.email}!
         </Text>
       )}
