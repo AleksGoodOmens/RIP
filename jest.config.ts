@@ -25,6 +25,9 @@ const jestConfig = {
     '!**/vendor/**',
     '!**/__tests__/**',
     '!**/test-utils/**',
+    '!src/components/ui/**',
+    '!src/interfaces/**',
+    '!src/utils/zod/**',
   ],
 };
 
