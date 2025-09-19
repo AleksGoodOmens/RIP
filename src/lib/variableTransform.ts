@@ -1,5 +1,14 @@
+import { IPair } from '@/interfaces';
+
 export const replaceVariables = (input: string, variables: Record<string, string>): string => {
   return input.replace(/{{(.*?)}}/g, (_, key) => variables[key] ?? `{{${key}}}`);
+};
+
+export const replaceVariablesIsPair = (pair: IPair, variables: Record<string, string>): IPair => {
+  const key = pair[0];
+  const value = pair[1];
+
+  return [key, replaceVariables(value, variables)];
 };
 
 export const encodeVariables = (input: string, variables: Record<string, string>): string => {

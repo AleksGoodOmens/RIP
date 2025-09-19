@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 
 import {
   RequestBodyEditor,
@@ -13,7 +13,7 @@ import {
 } from '@/components';
 import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
-import { encodeVariables, replaceVariables } from '@/lib/variableTransform';
+import { encodeVariables, replaceVariables, replaceVariablesIsPair } from '@/lib/variableTransform';
 
 import { HighlightedUrl } from '../highlighted-url/HighlightedUrl';
 
@@ -21,12 +21,14 @@ interface RestClientProps {
   initialMethod?: HttpMethod;
   initialUrl?: string;
   initialBody?: string;
+  initialHeaders?: string;
 }
 
 export default function RestClient({
   initialMethod,
   initialUrl,
   initialBody = '',
+  initialHeaders = '[]',
 }: RestClientProps) {
   const t = useTranslations('rest-client');
   const router = useRouter();
@@ -35,15 +37,22 @@ export default function RestClient({
   const [variables] = useState<IPair[]>(() =>
     JSON.parse(localStorage.getItem('variablesRIP') || '[]')
   );
-  const [url, setUrl] = useState(encodeVariables(initialUrl || '', Object.fromEntries(variables)));
-  const [headers, setHeaders] = useState<IPair[]>([]);
+
+  const variablesObject = useMemo(() => {
+    return Object.fromEntries(variables);
+  }, [variables]);
+  const [url, setUrl] = useState(encodeVariables(initialUrl || '', variablesObject));
+  const [headers, setHeaders] = useState<IPair[]>(
+    JSON.parse(encodeVariables(initialHeaders, variablesObject))
+  );
   const [body, setBody] = useState(initialBody);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const headersObject = Object.fromEntries(headers);
-    const apiUrlBase64 = encodeTo64(replaceVariables(url, Object.fromEntries(variables)));
-    const headersBase64 = encodeTo64(JSON.stringify(headersObject));
+    const cleanHeaders = headers.map((pair) => replaceVariablesIsPair(pair, variablesObject));
+    console.log(cleanHeaders);
+    const apiUrlBase64 = encodeTo64(replaceVariables(url, variablesObject));
+    const headersBase64 = encodeTo64(JSON.stringify(cleanHeaders));
     const bodyBase64 = body ? encodeTo64(body) : '';
 
     router.push(`/rest-client/${method}/${apiUrlBase64}/${headersBase64}/${bodyBase64}`);

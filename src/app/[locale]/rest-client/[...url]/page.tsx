@@ -16,6 +16,7 @@ const RestClient = dynamic(() => import('@/components/rest-client/RestClient'), 
 export default async function RestClientPage({ params }: Props) {
   const { url } = await params;
   const urlBase64: string | undefined = url[1];
+  const headersBase64: string | undefined = url[2];
   const bodyBase64: string | undefined = url[3];
 
   const t = await getTranslations('rest-client.titles');
@@ -23,13 +24,19 @@ export default async function RestClientPage({ params }: Props) {
   const initialMethod = url[0] as HttpMethod;
   const initialUrl = urlBase64 ? decodeToString(urlBase64) : '';
   const initialBody = bodyBase64 ? decodeToString(bodyBase64) : '';
+  const initialHeaders = headersBase64 ? decodeToString(headersBase64) : '[]';
 
   return (
     <section>
       <Text as="h1" variant={'main-title'}>
         {t('main')}
       </Text>
-      <RestClient initialMethod={initialMethod} initialUrl={initialUrl} initialBody={initialBody} />
+      <RestClient
+        initialMethod={initialMethod}
+        initialUrl={initialUrl}
+        initialBody={initialBody}
+        initialHeaders={initialHeaders}
+      />
     </section>
   );
 }
