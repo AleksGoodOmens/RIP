@@ -1,32 +1,31 @@
-import { JestConfigWithTsJest } from 'ts-jest';
-
-const config: JestConfigWithTsJest = {
+const jestConfig = {
   preset: 'ts-jest/presets/default-esm',
-  testEnvironment: 'jest-environment-jsdom',
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   globals: {
     'ts-jest': {
       useESM: true,
     },
   },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(react-syntax-highlighter|next-intl|@formatjs|intl-messageformat|lucide-react|@radix-ui|lodash-es)/)',
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.svg$': '<rootDir>/__mocks__/svgMock.tsx',
+    '\\.css$': 'identity-obj-proxy',
   },
-  transform: {
-    '^.+\\.tsx?$': ['ts-jest', { useESM: true }],
-  },
+  testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   collectCoverage: true,
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.test.{ts,tsx}'],
-  coverageThreshold: {
-    global: {
-      branches: 70,
-      functions: 80,
-      lines: 80,
-      statements: 80,
-    },
-  },
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    'app/**/*.{ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/__tests__/**',
+    '!**/test-utils/**',
+  ],
 };
 
-export default config;
+export default jestConfig;

@@ -8,6 +8,7 @@ import { IPair } from '@/interfaces';
 import { Button } from '../ui';
 
 interface PairsEditorProps {
+  title?: string;
   pairs: IPair[];
   onPairsChange: (pairs: IPair[]) => void;
   onAddPair?: () => void;
