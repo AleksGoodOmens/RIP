@@ -15,7 +15,7 @@ export default async function RestClientPage({ params }: Props) {
   const method = url[0];
   const urlBase64 = url[1];
   const headersBase64 = url[2];
-  const bodyBase64 = url[3] ? url[3] : '';
+  const bodyBase64 = url[3] || '';
 
   const t = await getTranslations('rest-client.titles');
 
@@ -29,7 +29,7 @@ export default async function RestClientPage({ params }: Props) {
   if (!result) return <div>Unexpected error</div>;
 
   return (
-    <AccordionWrapper title={t('response')}>
+    <AccordionWrapper title={t('response')} collapsed={false}>
       <HighlighterResponse responseBody={result.body} responseStatus={result.status} />
     </AccordionWrapper>
   );

@@ -1,3 +1,5 @@
+import { cn } from '@/lib/utils';
+
 interface HighlightVariablesProps {
   input: string;
   variables: Record<string, string>;
@@ -15,11 +17,8 @@ const HighlightVariables = ({ input, variables }: HighlightVariablesProps) => {
         const key = match[1];
         const exists = key in variables;
 
-        const baseClass = 'font-mono px-1 rounded';
-        const colorClass = exists ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
-
         return (
-          <span key={i} className={`${baseClass} ${colorClass}`}>
+          <span key={i} className={cn(exists ? ' text-chart-2' : 'text-destructive')}>
             {part}
           </span>
         );

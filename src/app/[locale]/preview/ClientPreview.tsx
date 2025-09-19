@@ -11,7 +11,7 @@ export const ClientPreview = () => {
 
   return (
     <div>
-      <PairsEditor title="Headers" pairs={headers} onPairsChange={setHeaders} />
+      <PairsEditor pairs={headers} onPairsChange={setHeaders} />
       <VariableEditor />
     </div>
   );

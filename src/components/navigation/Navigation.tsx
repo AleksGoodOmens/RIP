@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/', name: 'home' },
   { href: '/rest-client', name: 'REST-client' },
   { href: '/rest-client/history', name: 'history' },
+  { href: '/rest-client/variables', name: 'variables' },
   { href: '/preview', name: 'preview' },
 ];
 
@@ -22,10 +23,17 @@ export const Navigation = ({ className }: Props) => {
 
   const getIsActive = (href: string) => {
     if (href === '/rest-client') {
-      return activeLink.startsWith('/rest-client') && activeLink !== '/rest-client/history';
+      return (
+        activeLink.startsWith('/rest-client') &&
+        activeLink !== '/rest-client/history' &&
+        activeLink !== '/rest-client/variables'
+      );
     }
     if (href === '/rest-client/history') {
       return activeLink === '/rest-client/history';
+    }
+    if (href === '/rest-client/variables') {
+      return activeLink === '/rest-client/variables';
     }
     return activeLink === href;
   };

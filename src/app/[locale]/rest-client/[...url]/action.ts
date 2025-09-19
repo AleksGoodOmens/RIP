@@ -11,9 +11,10 @@ interface Props {
 export const getResponse = async ({ urlInBase64, method, headersBase64, bodyBase64 }: Props) => {
   const decodedUrl = decodeToString(urlInBase64);
   const decodedHeaders = await JSON.parse(decodeToString(headersBase64));
-  const decodeBody = bodyBase64 ? decodeToString(bodyBase64) : undefined;
+  const decodedBody = decodeToString(bodyBase64);
+
   try {
-    const response = await sendUniversalRequest(decodedUrl, method, decodedHeaders, decodeBody);
+    const response = await sendUniversalRequest(decodedUrl, method, decodedHeaders, decodedBody);
 
     return response;
   } catch (err) {

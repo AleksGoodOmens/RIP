@@ -8,10 +8,11 @@ import { cn } from '@/lib/utils';
 
 interface AccordionWrapperProps extends PropsWithChildren {
   title: string;
+  collapsed?: boolean;
 }
 
-export const AccordionWrapper = ({ title, children }: AccordionWrapperProps) => {
-  const [isHided, setIsHided] = useState(false);
+export const AccordionWrapper = ({ title, children, collapsed = true }: AccordionWrapperProps) => {
+  const [isHided, setIsHided] = useState(collapsed);
 
   const handleShow = () => {
     setIsHided((prev) => !prev);
