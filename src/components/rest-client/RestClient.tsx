@@ -12,8 +12,8 @@ import {
   AccordionWrapper,
 } from '@/components';
 import { HttpMethod, IPair } from '@/interfaces';
-import { encodeTo64 } from '@/lib/utils';
-import { encodeVariables, replaceVariables, replaceVariablesIsPair } from '@/lib/variableTransform';
+import { encodeTo64, replaceVariablesInBody, replaceVariablesInPairs } from '@/lib/utils';
+import { encodeVariables, replaceVariables } from '@/lib/variableTransform';
 
 import { HighlightedUrl } from '../highlighted-url/HighlightedUrl';
 
@@ -27,8 +27,8 @@ interface RestClientProps {
 export default function RestClient({
   initialMethod,
   initialUrl,
-  initialBody = '',
-  initialHeaders = '[]',
+  initialBody,
+  initialHeaders,
 }: RestClientProps) {
   const t = useTranslations('rest-client');
   const router = useRouter();
@@ -41,21 +41,34 @@ export default function RestClient({
   const variablesObject = useMemo(() => {
     return Object.fromEntries(variables);
   }, [variables]);
+
   const [url, setUrl] = useState(encodeVariables(initialUrl || '', variablesObject));
   const [headers, setHeaders] = useState<IPair[]>(
-    JSON.parse(encodeVariables(initialHeaders, variablesObject))
+    initialHeaders ? JSON.parse(encodeVariables(initialHeaders, variablesObject)) : []
   );
-  const [body, setBody] = useState(initialBody);
+
+  const [body, setBody] = useState(
+    initialBody ? encodeVariables(initialBody, variablesObject) : ''
+  );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const cleanHeaders = headers.map((pair) => replaceVariablesIsPair(pair, variablesObject));
-    console.log(cleanHeaders);
-    const apiUrlBase64 = encodeTo64(replaceVariables(url, variablesObject));
-    const headersBase64 = encodeTo64(JSON.stringify(cleanHeaders));
-    const bodyBase64 = body ? encodeTo64(body) : '';
+    const replacedUrl = replaceVariables(url, variablesObject);
+    const replacedHeaders = replaceVariablesInPairs(headers, variablesObject);
+    const replacedBody = replaceVariablesInBody(body, variablesObject);
+    const urlBase64 = encodeTo64(replacedUrl);
+    const headersBase64 = encodeTo64(JSON.stringify(replacedHeaders));
 
-    router.push(`/rest-client/${method}/${apiUrlBase64}/${headersBase64}/${bodyBase64}`);
+    let bodyBase64 = '';
+    if (replacedBody !== undefined && replacedBody !== null && replacedBody !== '') {
+      if (typeof replacedBody === 'string') {
+        bodyBase64 = encodeTo64(replacedBody);
+      } else {
+        bodyBase64 = encodeTo64(JSON.stringify(replacedBody));
+      }
+    }
+
+    router.push(`/rest-client/${method}/${urlBase64}/${headersBase64}/${bodyBase64}`);
   };
 
   const isDisabled = !Boolean(url);

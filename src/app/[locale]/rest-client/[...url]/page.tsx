@@ -22,9 +22,9 @@ export default async function RestClientPage({ params }: Props) {
   const t = await getTranslations('rest-client.titles');
 
   const initialMethod = url[0] as HttpMethod;
-  const initialUrl = urlBase64 ? decodeToString(urlBase64) : '';
-  const initialBody = bodyBase64 ? decodeToString(bodyBase64) : '';
-  const initialHeaders = headersBase64 ? decodeToString(headersBase64) : '[]';
+  const initialUrl = urlBase64 && decodeToString(urlBase64);
+  const initialBody = bodyBase64 && decodeToString(bodyBase64);
+  const initialHeaders = headersBase64 && decodeToString(headersBase64);
 
   return (
     <section>

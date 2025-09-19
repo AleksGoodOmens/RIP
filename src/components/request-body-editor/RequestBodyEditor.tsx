@@ -8,21 +8,14 @@ import 'prismjs/themes/prism-tomorrow.css';
 import { useEffect, useRef, useState } from 'react';
 import Editor from 'react-simple-code-editor';
 
+import { isValidJSON } from '@/lib/utils';
+
 import { Button } from '../ui';
 
 interface Props {
   value: string;
   onChange: (value: string) => void;
 }
-
-const isValidJSON = (str: string) => {
-  try {
-    JSON.parse(str);
-    return true;
-  } catch {
-    return false;
-  }
-};
 
 export function RequestBodyEditor({ value, onChange }: Props) {
   const [isPrettify, setPrettify] = useState(false);
