@@ -110,6 +110,16 @@
     "signed": "Signed in as",
     "logout": "Logout",
     "failLogin": "login failed",
-    "successLogin": "login success"
+    "successLogin": "login success",
+    "variables": {
+      "deleted": "variable deleted",
+      "updated": "variable updated",
+      "added": "variable added"
+    },
+    "headers": {
+      "deleted": "header deleted",
+      "updated": "header updated",
+      "added": "header added"
+    }
   }
 }

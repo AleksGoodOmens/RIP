@@ -11,10 +11,21 @@ export default function VariablesClient() {
     JSON.parse(localStorage.getItem('variablesRIP') || '[]')
   );
 
-  const t = useTranslations('variables');
+  const t = useTranslations();
 
   useEffect(() => {
     localStorage.setItem('variablesRIP', JSON.stringify(variables));
   }, [variables]);
-  return <PairsEditor pairs={variables} onPairsChange={setVariables} label={t('label')} />;
+  return (
+    <PairsEditor
+      pairs={variables}
+      onPairsChange={setVariables}
+      label={t('variables.label')}
+      messages={{
+        deleted: t('toasts.variables.deleted'),
+        updated: t('toasts.variables.updated'),
+        added: t('toasts.variables.added'),
+      }}
+    />
+  );
 }
