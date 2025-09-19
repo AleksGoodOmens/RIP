@@ -6,7 +6,7 @@ import { usePathname } from '@/i18n/navigation';
 import { DesktopView } from '../desktop-view/DesktopView';
 import { MobileView } from '../mobile-view/MobileView';
 
-export const Header = () => {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const pathname = usePathname();
@@ -93,4 +93,4 @@ export const Header = () => {
       <DesktopView isMinimized={isMinimized} />
     </header>
   );
-};
+}
