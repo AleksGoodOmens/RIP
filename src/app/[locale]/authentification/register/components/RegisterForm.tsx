@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
 
 import { InputField, PasswordField } from '@/components';
 import { Button } from '@/components/ui';
@@ -25,12 +26,13 @@ export default function RegisterForm() {
 
   const t = useTranslations();
   const onSubmit = async (data: onSubmitProps) => {
-    const result = await registerAction(data);
+    const result = await registerAction(data, t('toasts.successRegister'));
 
     if (!result.success) {
       Object.entries(result.fieldErrors).forEach(([field, message]) => {
         setError(field as keyof typeof data, { message });
       });
+      toast.error(t('toasts.failRegister'));
       return;
     }
 

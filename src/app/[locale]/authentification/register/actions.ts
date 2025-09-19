@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 import { doCreateUserWithEmailAndPassword } from '@/firebase/auth';
 import { FormActionResult } from '@/lib/utils';
@@ -6,11 +7,14 @@ import { mapFirebaseErrorToField } from '@/utils/authErrors';
 import { parseForm } from '@/utils/zod/parse-form';
 import { registerSchema } from '@/utils/zod/zod-schemas';
 
-export async function registerAction(raw: {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}): Promise<FormActionResult> {
+export async function registerAction(
+  raw: {
+    email: string;
+    password: string;
+    confirmPassword: string;
+  },
+  message: string
+): Promise<FormActionResult> {
   const parsed = parseForm(registerSchema, raw);
   if (!parsed.success) return parsed;
 
@@ -31,6 +35,7 @@ export async function registerAction(raw: {
     const { field, message } = mapFirebaseErrorToField(error);
     return { success: false, fieldErrors: { [field]: message } };
   }
+  toast.success(message);
 
-  redirect('/home');
+  redirect('/');
 }

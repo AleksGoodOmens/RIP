@@ -2,8 +2,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
 
-import { routing } from '@/i18n/routing';
 import './globals.css';
+import { Toast } from '@/components';
+import { routing } from '@/i18n/routing';
 import Providers from '@/providers/Providers';
 
 import { Footer } from './components/footer/Footer';
@@ -49,6 +50,7 @@ export default async function RootLayout({
           <Header />
           <main className="pt-32 grow fadeIn-children container mx-auto">{children}</main>
           <Footer />
+          <Toast />
         </Providers>
       </body>
     </html>
