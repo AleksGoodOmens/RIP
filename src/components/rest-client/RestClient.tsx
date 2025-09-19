@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { FormEvent, useContext, useEffect, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import {
   RequestBodyEditor,
@@ -11,7 +11,6 @@ import {
   CodeGenerator,
   AccordionWrapper,
 } from '@/components';
-import { AuthContext } from '@/context/authContext';
 import { HttpMethod, IPair } from '@/interfaces';
 import { encodeTo64 } from '@/lib/utils';
 import { encodeVariables, replaceVariables } from '@/lib/variableTransform';
@@ -37,18 +36,12 @@ export default function RestClient({
     JSON.parse(localStorage.getItem('variablesRIP') || '[]')
   );
   const [url, setUrl] = useState(encodeVariables(initialUrl || '', Object.fromEntries(variables)));
-  const [headers, setHeaders] = useState<IPair[]>(() =>
-    JSON.parse(localStorage.getItem('headersRIP') || "[['Content-type', 'application/json']]")
-  );
+  const [headers, setHeaders] = useState<IPair[]>([]);
   const [body, setBody] = useState(initialBody);
 
   useEffect(() => {
     localStorage.setItem('variablesRIP', JSON.stringify(variables));
   }, [variables]);
-
-  useEffect(() => {
-    localStorage.setItem('headersRIP', JSON.stringify(headers));
-  });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

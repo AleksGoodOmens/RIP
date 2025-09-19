@@ -40,7 +40,7 @@ export const HighlightedUrl = ({ value, variables, onChange, placeholder }: Prop
       overlayRef.current.style.padding = inputStyle.padding;
       overlayRef.current.style.margin = inputStyle.margin;
     }
-  }, [value]);
+  }, []);
 
   return (
     <div className="relative w-full">
@@ -53,10 +53,6 @@ export const HighlightedUrl = ({ value, variables, onChange, placeholder }: Prop
         onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
         className="w-full h-full  bg-transparent text-transparent caret-foreground z-10 relative"
-        style={{
-          color: 'transparent',
-          WebkitTextFillColor: 'transparent',
-        }}
       />
 
       <div
