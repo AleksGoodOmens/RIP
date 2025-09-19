@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
 
 import { InputField, PasswordField } from '@/components';
 import { Button } from '@/components/ui';
@@ -22,13 +23,20 @@ export default function LoginForm() {
     formData.append('email', data.email);
     formData.append('password', data.password);
 
-    const result = await loginAction(formData);
+    const result = await loginAction(formData, t('toasts.successLogin'));
 
     if (!result.success) {
       Object.entries(result.fieldErrors).forEach(([field, message]) => {
         setError(field as keyof typeof data, { message });
       });
+      toast.error(t('toasts.failLogin'), {
+        toastId: 'fail_login',
+      });
+      return;
     }
+    toast.success(t('toasts.successLogin'), {
+      toastId: 'success_login',
+    });
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

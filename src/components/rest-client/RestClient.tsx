@@ -30,7 +30,7 @@ export default function RestClient({
   initialBody,
   initialHeaders,
 }: RestClientProps) {
-  const t = useTranslations('rest-client');
+  const t = useTranslations();
   const router = useRouter();
 
   const [method, setMethod] = useState(initialMethod || 'GET');
@@ -81,21 +81,29 @@ export default function RestClient({
           name="url-input"
           value={url}
           onChange={(e) => setUrl(e.target.value.trimStart())}
-          placeholder={t('url-placeholder')}
+          placeholder={t('rest-client.url-placeholder')}
           variables={Object.fromEntries(variables)}
         />
         <Button disabled={isDisabled} type="submit">
-          {t('send')}
+          {t('rest-client.send')}
         </Button>
       </form>
       <section className="grid lg:grid-cols-3 items-start gap-4 my-4">
-        <AccordionWrapper title={t('titles.headers')}>
-          <PairsEditor pairs={headers} onPairsChange={setHeaders} />
+        <AccordionWrapper title={t('rest-client.titles.headers')}>
+          <PairsEditor
+            pairs={headers}
+            onPairsChange={setHeaders}
+            messages={{
+              deleted: t('toasts.headers.deleted'),
+              updated: t('toasts.headers.updated'),
+              added: t('toasts.headers.added'),
+            }}
+          />
         </AccordionWrapper>
-        <AccordionWrapper title={t('titles.body')}>
+        <AccordionWrapper title={t('rest-client.titles.body')}>
           <RequestBodyEditor value={body} onChange={setBody} />
         </AccordionWrapper>
-        <AccordionWrapper title={t('titles.snippets')}>
+        <AccordionWrapper title={t('rest-client.titles.snippets')}>
           <CodeGenerator request={{ method, url, headers, body }} />
         </AccordionWrapper>
       </section>

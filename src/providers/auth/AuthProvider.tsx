@@ -1,7 +1,9 @@
 'use client';
 
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { useTranslations } from 'next-intl';
 import { PropsWithChildren, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { AuthContext } from '@/context/authContext';
 import { auth } from '@/firebase/firebase';
@@ -9,6 +11,7 @@ import { auth } from '@/firebase/firebase';
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const t = useTranslations('toasts');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -17,10 +20,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [t]);
 
   const logout = async () => {
     await signOut(auth);
+    toast.info(t('logout'), {
+      toastId: 'logout',
+    });
     setUser(null);
   };
 

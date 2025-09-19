@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 import { doSignInWithEmailAndPassword } from '@/firebase/auth';
 import { FormActionResult } from '@/lib/utils';
@@ -6,7 +7,7 @@ import { mapFirebaseErrorToField } from '@/utils/authErrors';
 import { parseForm } from '@/utils/zod/parse-form';
 import { loginSchema } from '@/utils/zod/zod-schemas';
 
-export async function loginAction(formData: FormData): Promise<FormActionResult> {
+export async function loginAction(formData: FormData, message: string): Promise<FormActionResult> {
   const raw = {
     email: formData.get('email'),
     password: formData.get('password'),
@@ -23,6 +24,6 @@ export async function loginAction(formData: FormData): Promise<FormActionResult>
     const { field, message } = mapFirebaseErrorToField(error);
     return { success: false, fieldErrors: { [field]: message } };
   }
-
+  toast.success(message);
   redirect('/');
 }

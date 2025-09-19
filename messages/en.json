@@ -102,5 +102,24 @@
       },
       "conclusion": "Now you can create flexible requests that are easily adaptable to different usage scenarios!"
     }
+  },
+  "toasts": {
+    "failRegister": "Register failed",
+    "successRegister": "Register success",
+    "alreadySignedIn": "already signed in",
+    "signed": "Signed in as",
+    "logout": "Logout",
+    "failLogin": "login failed",
+    "successLogin": "login success",
+    "variables": {
+      "deleted": "variable deleted",
+      "updated": "variable updated",
+      "added": "variable added"
+    },
+    "headers": {
+      "deleted": "header deleted",
+      "updated": "header updated",
+      "added": "header added"
+    }
   }
 }
