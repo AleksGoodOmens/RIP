@@ -36,8 +36,7 @@
       "snippets": "Code Snippets",
       "headers": "Headers editor",
       "body": "Body editor",
-      "response": "Server response",
-      "variables": "User variables"
+      "response": "Server response"
     },
     "body-editor-placeholder": "Enter request body (JSON or plain text)..."
   },
@@ -54,7 +53,8 @@
     "home": "home",
     "REST-client": "REST-client",
     "preview": "preview",
-    "history": "history"
+    "history": "history",
+    "variables": "variables"
   },
   "code-generator": {
     "messages": {
@@ -65,5 +65,8 @@
   "history": {
     "title": "Requests History",
     "emptyMessage": "You haven't executed any requests! <block>It's empty here. Try:</block>"
+  },
+  "variables": {
+    "label": "add new user variable"
   }
 }

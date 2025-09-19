@@ -2,13 +2,14 @@
 import { PlusIcon } from 'lucide-react';
 import { useCallback } from 'react';
 
-import { Pair } from '@/components';
+import { Pair, Text } from '@/components';
 import { IPair } from '@/interfaces';
 
 import { Button } from '../ui';
 
 interface PairsEditorProps {
   pairs: IPair[];
+  label?: string;
   onPairsChange: (pairs: IPair[]) => void;
   onAddPair?: () => void;
   onRemovePair?: (index: number) => void;
@@ -18,6 +19,7 @@ interface PairsEditorProps {
 
 export const PairsEditor = ({
   pairs,
+  label,
   onPairsChange,
   onAddPair,
   onRemovePair,
@@ -52,7 +54,12 @@ export const PairsEditor = ({
 
   return (
     <>
-      <section className="mb-4">
+      <section className="mb-4 flex items-center gap-4">
+        {label && (
+          <Text as={'h2'} className="capitalize">
+            {label}
+          </Text>
+        )}
         <Button
           aria-label="add"
           variant={isAddDisabled ? 'outline' : 'default'}

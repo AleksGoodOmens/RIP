@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import {
   RequestBodyEditor,
@@ -32,16 +32,12 @@ export default function RestClient({
   const router = useRouter();
 
   const [method, setMethod] = useState(initialMethod || 'GET');
-  const [variables, setVariables] = useState<IPair[]>(() =>
+  const [variables] = useState<IPair[]>(() =>
     JSON.parse(localStorage.getItem('variablesRIP') || '[]')
   );
   const [url, setUrl] = useState(encodeVariables(initialUrl || '', Object.fromEntries(variables)));
   const [headers, setHeaders] = useState<IPair[]>([]);
   const [body, setBody] = useState(initialBody);
-
-  useEffect(() => {
-    localStorage.setItem('variablesRIP', JSON.stringify(variables));
-  }, [variables]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,10 +66,7 @@ export default function RestClient({
           {t('send')}
         </Button>
       </form>
-      <section className="grid sm:grid-cols-2 items-start gap-4 my-4">
-        <AccordionWrapper title={t('titles.variables')}>
-          <PairsEditor pairs={variables} onPairsChange={setVariables} />
-        </AccordionWrapper>
+      <section className="grid lg:grid-cols-3 items-start gap-4 my-4">
         <AccordionWrapper title={t('titles.headers')}>
           <PairsEditor pairs={headers} onPairsChange={setHeaders} />
         </AccordionWrapper>
