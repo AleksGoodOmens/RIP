@@ -24,3 +24,4 @@ export * from './code-generator/CodeGenerator';
 export * from './accordion-wrapper/AccordionWrapper';
 export * from './request-body-editor/RequestBodyEditor';
 export * from './variables-client/VariablesClient';
+export * from './variables-guide/VariablesGuide';

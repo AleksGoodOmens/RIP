@@ -28,12 +28,8 @@ const textVariants = cva('font-bold tracking-tight', {
       'block-title': 'font-bold text-xl text-destructive',
       'main-title':
         'font-bold text-2xl text-center sm:text-left sm:text-4xl md:text-5xl lg:text-6xl py-8',
+      'list-title': 'mt-4, text-destructive',
     },
-  },
-  defaultVariants: {
-    size: 'md',
-    align: 'left',
-    weight: 'normal',
   },
 });
 
