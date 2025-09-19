@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import { getTranslations } from 'next-intl/server';
 
 import { Text } from '@/components';
 
-import LoginForm from './components/LoginForm';
-
+const LoginForm = dynamic(() => import('./components/LoginForm'), {
+  loading: () => <p>Loading login form.</p>,
+});
 export default async function LoginPage() {
   const t = await getTranslations();
   return (

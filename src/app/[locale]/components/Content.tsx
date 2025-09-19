@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { Text, Navbar } from '@/components';
 import { AuthContext } from '@/context/authContext';
 
-export const Content = () => {
+export default function Content() {
   const { user } = useContext(AuthContext);
   const t = useTranslations('home');
 
@@ -28,4 +28,4 @@ export const Content = () => {
       )}
     </div>
   );
-};
+}

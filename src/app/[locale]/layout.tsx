@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'next-intl';
@@ -7,18 +8,21 @@ import './globals.css';
 import Providers from '@/providers/Providers';
 
 import { Footer } from './components/footer/Footer';
-import { Header } from './components/header/Header';
+
+const Header = dynamic(() => import('./components/header/Header'), {
+  loading: () => <p>Loading Header...</p>,
+});
 
 import type { Metadata } from 'next';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
 });
 
 export const metadata: Metadata = {
