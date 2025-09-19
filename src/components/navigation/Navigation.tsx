@@ -11,9 +11,8 @@ interface Props {
 const navLinks = [
   { href: '/', name: 'home' },
   { href: '/rest-client', name: 'REST-client' },
-  { href: '/rest-client/history', name: 'history' },
   { href: '/rest-client/variables', name: 'variables' },
-  { href: '/preview', name: 'preview' },
+  { href: '/rest-client/history', name: 'history' },
 ];
 
 export const Navigation = ({ className }: Props) => {
