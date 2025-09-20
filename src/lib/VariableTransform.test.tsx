@@ -1,4 +1,4 @@
-import { replaceVariables, encodeVariables } from '../../lib/variableTransform';
+import { replaceVariables, encodeVariables } from './variableTransform';
 
 describe('replaceVariables', () => {
   const variables = {
