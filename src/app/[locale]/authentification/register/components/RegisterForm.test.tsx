@@ -1,40 +1,3 @@
-jest.mock('next/navigation', () => ({
-  __esModule: true,
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
-}));
-
-jest.mock('next-intl', () => ({
-  __esModule: true,
-  useTranslations: () => (key: string) => key,
-}));
-
-jest.mock('next-intl/navigation', () => ({
-  __esModule: true,
-  createNavigation: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-  }),
-}));
-
-jest.mock('next-intl/routing', () => ({
-  __esModule: true,
-  defineRouting: () => ({}),
-}));
-
-jest.mock('react-syntax-highlighter/dist/esm/styles/prism', () => ({
-  __esModule: true,
-  atomDark: {},
-  oneLight: {},
-}));
-
-jest.mock('react-syntax-highlighter/dist/esm/styles/hljs', () => ({
-  __esModule: true,
-  atomOneDark: {},
-  atomOneLight: {},
-}));
-
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -46,6 +9,12 @@ const resetMock = jest.fn();
 jest.mock('../actions', () => ({
   __esModule: true,
   registerAction: jest.fn(),
+}));
+
+jest.mock('next-intl/server', () => ({
+  getTranslations: jest.fn().mockImplementation(() => {
+    return (key: string) => key;
+  }),
 }));
 
 jest.mock('@/utils/hooks/useAuth', () => ({
@@ -96,11 +65,10 @@ describe('RegisterForm', () => {
     render(<RegisterForm />);
     await userEvent.click(screen.getByRole('button', { name: 'button.submit' }));
 
-    expect(registerAction).toHaveBeenCalledWith({
-      email: 'test@example.com',
-      password: 'secret123',
-      confirmPassword: 'secret123',
-    });
+    expect(registerAction).toHaveBeenCalledWith(
+      { confirmPassword: 'secret123', email: 'test@example.com', password: 'secret123' },
+      'toasts.successRegister'
+    );
     expect(resetMock).toHaveBeenCalled();
   });
 

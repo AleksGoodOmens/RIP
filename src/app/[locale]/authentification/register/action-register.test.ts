@@ -39,7 +39,7 @@ describe('registerAction', () => {
   it('returns validation error if parseForm fails', async () => {
     mockParseForm.mockReturnValueOnce({ success: false, fieldErrors: { email: 'Required' } });
 
-    const result = await registerAction(validInput);
+    const result = await registerAction(validInput, 'test message');
 
     expect(mockParseForm).toHaveBeenCalledWith(expect.anything(), validInput);
     expect(result).toEqual({ success: false, fieldErrors: { email: 'Required' } });
@@ -51,7 +51,10 @@ describe('registerAction', () => {
       data: { ...validInput, confirmPassword: 'wrong' },
     });
 
-    const result = await registerAction({ ...validInput, confirmPassword: 'wrong' });
+    const result = await registerAction(
+      { ...validInput, confirmPassword: 'wrong' },
+      'test message'
+    );
 
     expect(result).toEqual({
       success: false,
@@ -64,7 +67,7 @@ describe('registerAction', () => {
     mockCreateUser.mockRejectedValueOnce(new Error('auth/email-already-in-use'));
     mockMapError.mockReturnValueOnce({ field: 'email', message: 'Email already in use' });
 
-    const result = await registerAction(validInput);
+    const result = await registerAction(validInput, 'test message');
 
     expect(mockCreateUser).toHaveBeenCalledWith({
       email: validInput.email,
@@ -78,8 +81,8 @@ describe('registerAction', () => {
     mockParseForm.mockReturnValueOnce({ success: true, data: validInput });
     mockCreateUser.mockResolvedValueOnce(undefined);
 
-    await registerAction(validInput);
+    await registerAction(validInput, 'test message');
 
-    expect(mockRedirect).toHaveBeenCalledWith('/home');
+    expect(mockRedirect).toHaveBeenCalledWith('/');
   });
 });

@@ -14,6 +14,9 @@ jest.mock('next/navigation', () => ({
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
 }));
+jest.mock('next-intl/server', () => ({
+  getTranslations: () => (key: string) => key,
+}));
 
 jest.mock('next-intl/navigation', () => ({
   createNavigation: () => ({
@@ -50,8 +53,8 @@ describe('RestClient', () => {
   it('renders form and submits correctly', async () => {
     render(<RestClient initialMethod="POST" initialUrl="https://api.example.com" />);
 
-    const input = screen.getByPlaceholderText('url-placeholder');
-    const button = screen.getByRole('button', { name: 'send' });
+    const input = screen.getByPlaceholderText('rest-client.url-placeholder');
+    const button = screen.getByRole('button', { name: 'rest-client.send' });
 
     expect(input).toHaveValue('https://api.example.com');
     expect(button).not.toBeDisabled();
