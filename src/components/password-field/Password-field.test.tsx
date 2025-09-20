@@ -17,6 +17,12 @@ jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
 }));
 
+jest.mock('next-intl/server', () => ({
+  getTranslations: jest.fn().mockImplementation(() => {
+    return (key: string) => key;
+  }),
+}));
+
 jest.mock('next-intl/navigation', () => ({
   __esModule: true,
   createNavigation: () => ({

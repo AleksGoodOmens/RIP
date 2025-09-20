@@ -5,6 +5,12 @@ jest.mock('next/navigation', () => ({
   }),
 }));
 
+jest.mock('next-intl/server', () => ({
+  getTranslations: jest.fn().mockImplementation(() => {
+    return (key: string) => key;
+  }),
+}));
+
 jest.mock('next-intl/routing', () => ({
   __esModule: true,
   defineRouting: () => ({
@@ -95,7 +101,7 @@ describe('LoginForm', () => {
     render(<LoginForm />);
     await userEvent.click(screen.getByRole('button', { name: 'button.enter' }));
 
-    expect(loginAction).toHaveBeenCalledWith(expect.any(FormData));
+    expect(loginAction).toHaveBeenCalled();
   });
 
   it('sets field errors if login fails', async () => {

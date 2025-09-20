@@ -5,6 +5,8 @@ const mockParseForm = jest.fn();
 const mockMapError = jest.fn();
 const mockRedirect = jest.fn();
 
+const testMessage = 'test message';
+
 jest.mock('next/navigation', () => ({
   __esModule: true,
   redirect: (...args: any[]) => mockRedirect(...args),
@@ -37,7 +39,7 @@ describe('loginAction', () => {
   it('returns validation error if parseForm fails', async () => {
     mockParseForm.mockReturnValueOnce({ success: false, fieldErrors: { email: 'Required' } });
 
-    const result = await loginAction(formData);
+    const result = await loginAction(formData, testMessage);
 
     expect(mockParseForm).toHaveBeenCalled();
     expect(result).toEqual({ success: false, fieldErrors: { email: 'Required' } });
@@ -51,7 +53,7 @@ describe('loginAction', () => {
     mockSignIn.mockRejectedValueOnce(new Error('auth/wrong-password'));
     mockMapError.mockReturnValueOnce({ field: 'password', message: 'Wrong password' });
 
-    const result = await loginAction(formData);
+    const result = await loginAction(formData, testMessage);
 
     expect(mockSignIn).toHaveBeenCalledWith({ email: 'test@example.com', password: 'secret' });
     expect(mockMapError).toHaveBeenCalled();
@@ -65,7 +67,7 @@ describe('loginAction', () => {
     });
     mockSignIn.mockResolvedValueOnce(undefined);
 
-    await loginAction(formData);
+    await loginAction(formData, testMessage);
 
     expect(mockRedirect).toHaveBeenCalledWith('/');
   });
