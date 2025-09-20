@@ -121,5 +121,9 @@
       "updated": "header updated",
       "added": "header added"
     }
+  },
+  "errors": {
+    "titleBoundary": "Something went wrong!",
+    "reset": "Try again"
   }
 }
