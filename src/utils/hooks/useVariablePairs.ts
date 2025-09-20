@@ -26,8 +26,7 @@ export const useVariablePairs = () => {
         );
         setVariablePairs(filtered);
         setStatus('idle');
-      } catch (err) {
-        console.error('Failed to fetch variables:', err);
+      } catch {
         setStatus('error');
       }
     };
@@ -55,8 +54,7 @@ export const useVariablePairs = () => {
       await saveVariables(uid!, Object.fromEntries(valid));
       setStatus('saved');
       setTimeout(() => setStatus('idle'), 1500);
-    } catch (err) {
-      console.error('Failed to save variables:', err);
+    } catch {
       setStatus('error');
     }
   };

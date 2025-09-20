@@ -38,7 +38,6 @@ describe('encodeVariables', () => {
   it('encodes known values into variable syntax (actual behavior)', () => {
     const input = 'https://api.example.com/users/123?token=abc123';
     const result = encodeVariables(input, variables);
-    // token=abc123 → token=abc{{userId}} due to replacement order
     expect(result).toBe('{{baseUrl}}/users/{{userId}}?token=abc{{userId}}');
   });
 
@@ -55,7 +54,6 @@ describe('encodeVariables', () => {
     };
     const input = '1234-123';
     const result = encodeVariables(input, overlapping);
-    // '1234' contains '123', so '123' gets replaced first
     expect(result).toBe('{{a}}4-{{a}}');
   });
 

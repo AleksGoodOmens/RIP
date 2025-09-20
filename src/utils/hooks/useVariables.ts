@@ -20,8 +20,7 @@ export const useVariables = (uid?: string) => {
         const data = await res.json();
         setVariables(data);
         setStatus('idle');
-      } catch (err) {
-        console.error('Variable load failed:', err);
+      } catch {
         setStatus('error');
       }
     };
@@ -48,8 +47,7 @@ export const useVariables = (uid?: string) => {
       if (!res.ok) throw new Error(`Failed to save variables: ${res.status}`);
       setStatus('saved');
       setTimeout(() => setStatus('idle'), 1500);
-    } catch (err) {
-      console.error('Variable update failed:', err);
+    } catch {
       setStatus('error');
     }
   };

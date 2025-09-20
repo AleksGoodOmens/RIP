@@ -11,8 +11,7 @@ export async function GET(req: NextRequest) {
   try {
     const variables = await getUserVariables(uid);
     return NextResponse.json(variables);
-  } catch (error) {
-    console.error('GET /api/variables error:', error);
+  } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -29,8 +28,7 @@ export async function POST(req: NextRequest) {
 
     await saveUserVariables(uid, body);
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('POST /api/variables error:', error);
+  } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
