@@ -11,7 +11,7 @@ interface Props {
 export default function Error({ error, reset }: Props) {
   const t = useTranslations('errors');
   return (
-    <section>
+    <section className="container mx-auto grid gap-4 place-content-center">
       <Text as={'h2'}>{t('titleBoundary')}</Text>
       <Text>{error.message}</Text>
       <Button variant={'destructive'} onClick={() => reset()}>
