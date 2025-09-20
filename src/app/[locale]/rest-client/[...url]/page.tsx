@@ -13,7 +13,7 @@ const RestClient = dynamic(() => import('@/components/rest-client/RestClient'), 
   loading: () => <p>Loading REST Client...</p>,
 });
 
-export default async function RestClientPage({ params }: Props) {
+export default async function UrlPage({ params }: Props) {
   const { url } = await params;
   const urlBase64: string | undefined = url[1];
   const headersBase64: string | undefined = url[2];

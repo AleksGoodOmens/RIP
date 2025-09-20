@@ -10,7 +10,7 @@ interface Props {
   }>;
 }
 
-export default async function RestClientPage({ params }: Props) {
+export default async function ResponsePage({ params }: Props) {
   const { url } = await params;
   const method = url[0];
   const urlBase64 = url[1];

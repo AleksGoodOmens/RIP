@@ -1,6 +1,6 @@
 import { Spinner } from '@/components';
 
-const Loading = () => {
+const MainLoading = () => {
   return <Spinner />;
 };
-export default Loading;
+export default MainLoading;
