@@ -13,10 +13,10 @@ const jestConfig = {
   },
   coverageThreshold: {
     global: {
-      branches: 25,
-      functions: 25,
-      lines: 25,
-      statements: 50,
+      branches: 50,
+      functions: 50,
+      lines: 50,
+      statements: 80,
     },
   },
   verbose: true,
@@ -43,7 +43,6 @@ const jestConfig = {
     '!src/components/ui/**',
     '!src/interfaces/**',
     '!src/utils/zod/**',
-    '!src/app/**/loading.tsx',
   ],
 };
 

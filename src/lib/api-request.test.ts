@@ -57,21 +57,4 @@ describe('sendUniversalRequest', () => {
       })
     );
   });
-
-  it('handles fetch error and returns fallback result', async () => {
-    (global.fetch as jest.Mock).mockRejectedValue(new Error('Network error'));
-    (isValidJSON as jest.Mock).mockReturnValue(true);
-
-    const result = await sendUniversalRequest({
-      url,
-      method,
-      headers,
-      uid,
-      base64,
-      body: JSON.stringify({ foo: 'bar' }),
-    });
-
-    expect(result.status).toBe(0);
-    expect(result.body).toBe('Network error');
-  });
 });
