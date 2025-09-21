@@ -13,14 +13,6 @@ export async function sendUniversalRequest(
     headers,
   };
 
-  console.log('Request details:', {
-    url,
-    method,
-    headers,
-    body,
-    bodyType: typeof body,
-  });
-
   if (
     body &&
     ['POST', 'PUT', 'PATCH', 'HEAD', 'OPTIONS', 'DELETE'].includes(method.toUpperCase())
@@ -58,8 +50,6 @@ export async function sendUniversalRequest(
     }
   }
 
-  console.log('Final request options:', options);
-
   try {
     const response = await fetch(url, options);
 
@@ -71,14 +61,11 @@ export async function sendUniversalRequest(
       parsedBody = await response.text();
     }
 
-    console.log('Response:', parsedBody);
-
     return {
       status: response.status,
       body: parsedBody,
     };
   } catch (error) {
-    console.error('Request failed:', error);
     return {
       status: 0,
       body: error instanceof Error ? error.message : 'Unknown error occurred',

@@ -15,9 +15,7 @@ function SignOutButton() {
     try {
       await doSignOut();
       router.push('/');
-    } catch (err) {
-      console.error('Sign-out failed:', err);
-    }
+    } catch {}
   };
 
   return (
