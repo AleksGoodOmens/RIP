@@ -18,9 +18,16 @@
     "coverage": "jest --coverage"
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,jsx,json,css,md}": [
-      "prettier --write",
-      "eslint --fix"
+    "*.{ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss,yml,yaml}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
@@ -74,6 +81,7 @@
     "eslint-config-next": "15.5.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-no-comments": "^1.1.10",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",

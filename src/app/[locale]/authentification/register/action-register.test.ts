@@ -7,22 +7,22 @@ const mockMapError = jest.fn();
 
 jest.mock('next/navigation', () => ({
   __esModule: true,
-  redirect: (...args: any[]) => mockRedirect(...args),
+  redirect: (...args: unknown[]) => mockRedirect(...args),
 }));
 
 jest.mock('@/utils/zod/parse-form', () => ({
   __esModule: true,
-  parseForm: (...args: any[]) => mockParseForm(...args),
+  parseForm: (...args: unknown[]) => mockParseForm(...args),
 }));
 
 jest.mock('@/firebase/auth', () => ({
   __esModule: true,
-  doCreateUserWithEmailAndPassword: (...args: any[]) => mockCreateUser(...args),
+  doCreateUserWithEmailAndPassword: (...args: unknown[]) => mockCreateUser(...args),
 }));
 
 jest.mock('@/utils/authErrors', () => ({
   __esModule: true,
-  mapFirebaseErrorToField: (...args: any[]) => mockMapError(...args),
+  mapFirebaseErrorToField: (...args: unknown[]) => mockMapError(...args),
 }));
 
 describe('registerAction', () => {

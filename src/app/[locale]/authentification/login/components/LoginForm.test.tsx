@@ -66,7 +66,7 @@ jest.mock('@/utils/hooks/useAuth', () => ({
       onBlur: jest.fn(),
       ref: jest.fn(),
     }),
-    handleSubmit: (fn: any) => (e: any) => {
+    handleSubmit: (fn: (arg0: { email: string; password: string }) => unknown) => (e: Event) => {
       e.preventDefault();
       return fn({
         email: 'test@example.com',

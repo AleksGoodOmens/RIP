@@ -5,6 +5,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
+import noCommentsPlugin from 'eslint-plugin-no-comments';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -30,12 +31,21 @@ const eslintConfig = [
     },
     plugins: {
       '@typescript-eslint': typescriptPlugin,
+      'no-comments': noCommentsPlugin,
     },
     rules: {
+      '@next/next/no-img-element': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-console': 'warn',
+      'no-debugger': 'warn',
+      'no-alert': 'warn',
+      'no-inline-comments': 'warn',
+      'line-comment-position': ['warn', { 'position': 'above' }],
+      'no-comments/disallowComments': 'warn',
     },
   },
 
@@ -86,9 +96,6 @@ const eslintConfig = [
       'build/**',
       'next-env.d.ts',
       'coverage',
-      '**/__tests__/**',
-      '**/*.test.ts',
-      '**/*.test.tsx',
     ],
   },
 ];
