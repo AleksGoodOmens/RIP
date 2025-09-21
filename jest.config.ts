@@ -3,8 +3,20 @@ const jestConfig = {
   globals: {
     'ts-jest': {
       useESM: true,
+      tsconfig: {
+        jsx: 'react-jsx',
+      },
     },
   },
+  coverageThreshold: {
+    global: {
+      branches: 25,
+      functions: 25,
+      lines: 25,
+      statements: 50,
+    },
+  },
+  verbose: true,
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transformIgnorePatterns: [
     'node_modules/(?!(react-syntax-highlighter|next-intl|@formatjs|intl-messageformat|lucide-react|@radix-ui|lodash-es)/)',

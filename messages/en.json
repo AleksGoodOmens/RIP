@@ -67,6 +67,7 @@
     "emptyMessage": "You haven't executed any requests! <block>It's empty here. Try:</block>"
   },
   "variables": {
+    "back": "Go back",
     "title": "variable",
     "label": "add new user variable",
     "guide": "Guide",

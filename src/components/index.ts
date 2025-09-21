@@ -25,3 +25,6 @@ export * from './request-body-editor/RequestBodyEditor';
 export * from './variables-client/VariablesClient';
 export * from './variables-guide/VariablesGuide';
 export * from './toast/Toast';
+export * from './history-client/HistoryClient';
+export * from './history-empty/HistoryEmpty';
+export * from './history-full/HistoryFull';

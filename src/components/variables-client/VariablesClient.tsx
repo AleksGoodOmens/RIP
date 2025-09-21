@@ -20,7 +20,7 @@ export default function VariablesClient() {
   }, [variables]);
   return (
     <>
-      <Button onClick={() => router.back()}>Go back to rest-client</Button>
+      <Button onClick={() => router.back()}>{t('variables.back')}</Button>
       <PairsEditor
         pairs={variables}
         onPairsChange={setVariables}
