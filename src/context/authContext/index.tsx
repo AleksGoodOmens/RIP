@@ -3,7 +3,7 @@
 import { User } from 'firebase/auth';
 import { createContext } from 'react';
 
-interface AuthContextType {
+export interface AuthContextType {
   user: User | null;
   loading: boolean;
   logout: () => Promise<void>;
