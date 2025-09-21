@@ -1,0 +1,130 @@
+{
+  "home": {
+    "greetings": "Welcome"
+  },
+  "email": {
+    "label": "Email",
+    "placeholder": "Enter your email"
+  },
+  "password": {
+    "label": "Password",
+    "placeholder": "Enter your password"
+  },
+  "confirmPassword": {
+    "label": "Confirm Password",
+    "placeholder": "Repeat your password"
+  },
+  "button": {
+    "submit": "Register",
+    "processing": "Processing...",
+    "enter": "Enter",
+    "login": "Login",
+    "register": "Register",
+    "signout": "Sign out"
+  },
+  "login": {
+    "header": "Please, sign in"
+  },
+  "register": {
+    "header": "Please, sign up"
+  },
+  "rest-client": {
+    "send": "Send",
+    "url-placeholder": "Enter URL or paste text",
+    "titles": {
+      "main": "RIP REST client",
+      "snippets": "Code Snippets",
+      "headers": "Headers editor",
+      "body": "Body editor",
+      "response": "Server response"
+    },
+    "body-editor-placeholder": "Enter request body (JSON or plain text)..."
+  },
+  "mod": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "notFound": {
+    "header": "This page is not RIP yet",
+    "button": "go home"
+  },
+  "navigation": {
+    "home": "home",
+    "REST-client": "REST-client",
+    "preview": "preview",
+    "history": "history",
+    "variables": "variables"
+  },
+  "code-generator": {
+    "messages": {
+      "error": "Failed to generate snippet",
+      "default": "make an request"
+    }
+  },
+  "history": {
+    "title": "Requests History",
+    "emptyMessage": "You haven't executed any requests! <block>It's empty here. Try:</block>"
+  },
+  "variables": {
+    "back": "Go back",
+    "title": "variable",
+    "label": "add new user variable",
+    "guide": "Guide",
+    "variablesGuide": {
+      "title": "Using variables in requests",
+      "intro": "Variables allow you to create dynamic requests that can be easily modified without manually editing the URL, headers, or request body.",
+      "howToUse": "How to use variables",
+      "syntaxTitle": "Variable syntax",
+      "syntaxDescription": "To use a variable, specify its name in double curly braces:",
+      "usagePlacesTitle": "Where variables can be used",
+      "usagePlaces": {
+        "url": "In URL:",
+        "headers": "In headers:",
+        "body": "In request body (JSON):"
+      },
+      "examplesTitle": "Usage examples",
+      "examples": {
+        "urlExample": "URL with variables:",
+        "headerExample": "Header with variable:",
+        "bodyExample": "Request body with variables:"
+      },
+      "featuresTitle": "Variable handling features",
+      "features": {
+        "storage": "Variables are stored in your browser's local storage",
+        "autoload": "The application will automatically load previously saved variables after successful authentication",
+        "lazyLoad": "Variable code is loaded only for authenticated users"
+      },
+      "tipsTitle": "Usage tips",
+      "tips": {
+        "naming": "Give variables clear names that reflect their purpose",
+        "confidential": "Use variables for confidential data (tokens, API keys)",
+        "validation": "Check that all variables used are defined (highlighted in green)"
+      },
+      "conclusion": "Now you can create flexible requests that are easily adaptable to different usage scenarios!"
+    }
+  },
+  "toasts": {
+    "failRegister": "Register failed",
+    "successRegister": "Register success",
+    "alreadySignedIn": "already signed in",
+    "signed": "Signed in as",
+    "logout": "Logout",
+    "failLogin": "login failed",
+    "successLogin": "login success",
+    "variables": {
+      "deleted": "variable deleted",
+      "updated": "variable updated",
+      "added": "variable added"
+    },
+    "headers": {
+      "deleted": "header deleted",
+      "updated": "header updated",
+      "added": "header added"
+    }
+  },
+  "errors": {
+    "titleBoundary": "Something went wrong!",
+    "reset": "Try again"
+  }
+}
