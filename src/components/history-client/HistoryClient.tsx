@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { HistoryEmpty, HistoryFull } from '@/components';
 import { auth } from '@/firebase/firebase';
@@ -17,10 +17,16 @@ export const HistoryClient = () => {
       .catch((err) => console.log(err));
   }, [uid]);
 
+  const sortedItems = useMemo(() => {
+    return [...list].sort(
+      (a, b) => new Date(b.metrics.timestamp).getTime() - new Date(a.metrics.timestamp).getTime()
+    );
+  }, [list]);
+
   return (
     <section>
       {!list.length && <HistoryEmpty />}
-      {list.length && <HistoryFull history={list} />}
+      {list.length && <HistoryFull history={sortedItems} />}
     </section>
   );
 };

@@ -56,7 +56,7 @@ export default function RestClient() {
     })
       .then((res) => setResponseData(res))
       .catch((data) => setResponseData(data));
-  }, []);
+  }, [bodyBase64, headersBase64, initialMethod, urlBase64, uid]);
 
   const variablesObject = useMemo(() => {
     return Object.fromEntries(variables);

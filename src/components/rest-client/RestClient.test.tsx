@@ -51,7 +51,7 @@ beforeEach(() => {
 
 describe('RestClient', () => {
   it('renders form and submits correctly', async () => {
-    render(<RestClient initialMethod="POST" initialUrl="https://api.example.com" />);
+    render(<RestClient />);
 
     const input = screen.getByPlaceholderText('rest-client.url-placeholder');
     const button = screen.getByRole('button', { name: 'rest-client.send' });
