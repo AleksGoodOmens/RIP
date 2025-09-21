@@ -18,7 +18,7 @@ export default function RestClientLayout({ children }: PropsWithChildren) {
 
   return (
     <section className="fadeIn-children">
-      {user && !loading && children}
+      {user && !loading && <>{children}</>}
       {loading && <div>Checking auth user</div>}
     </section>
   );

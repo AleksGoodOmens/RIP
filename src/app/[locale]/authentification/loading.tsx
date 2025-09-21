@@ -1,6 +1,6 @@
 import { Spinner } from '@/components';
 
-const Loading = () => {
+const AuthentificationLoading = () => {
   return <Spinner />;
 };
-export default Loading;
+export default AuthentificationLoading;

@@ -9,6 +9,9 @@ jest.mock('next/navigation', () => ({
   useRouter: () => ({
     push: pushMock,
   }),
+  useParams: () => ({
+    url: ['POST', encodeTo64('https://api.example.com')],
+  }),
 }));
 
 jest.mock('next-intl', () => ({
@@ -40,6 +43,7 @@ jest.mock('react-syntax-highlighter/dist/esm/styles/hljs', () => ({
 }));
 
 import RestClient from './RestClient';
+import { encodeTo64 } from '@/lib/utils';
 
 beforeEach(() => {
   Storage.prototype.getItem = jest.fn(() => JSON.stringify([['token', 'abc']]));
@@ -51,7 +55,7 @@ beforeEach(() => {
 
 describe('RestClient', () => {
   it('renders form and submits correctly', async () => {
-    render(<RestClient initialMethod="POST" initialUrl="https://api.example.com" />);
+    render(<RestClient />);
 
     const input = screen.getByPlaceholderText('rest-client.url-placeholder');
     const button = screen.getByRole('button', { name: 'rest-client.send' });

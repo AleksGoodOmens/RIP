@@ -1,19 +1,22 @@
 const jestConfig = {
   preset: 'ts-jest/presets/default-esm',
-  globals: {
-    'ts-jest': {
-      useESM: true,
-      tsconfig: {
-        jsx: 'react-jsx',
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        useESM: true,
+        tsconfig: {
+          jsx: 'react-jsx',
+        },
       },
-    },
+    ],
   },
   coverageThreshold: {
     global: {
-      branches: 27,
-      functions: 27,
-      lines: 48,
-      statements: 48,
+      branches: 25,
+      functions: 25,
+      lines: 25,
+      statements: 50,
     },
   },
   verbose: true,

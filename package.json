@@ -14,6 +14,7 @@
     "prepare": "husky install",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:watchALl": "jest --watchAll",
     "coverage": "jest --coverage"
   },
   "lint-staged": {
