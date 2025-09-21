@@ -34,6 +34,7 @@ const eslintConfig = [
       'no-comments': noCommentsPlugin,
     },
     rules: {
+      '@next/next/no-img-element': 'off',
       '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-floating-promises': 'error',
