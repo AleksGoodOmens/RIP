@@ -1,6 +1,4 @@
 import { Spinner } from '@/components';
 
-const RestClientLoading = () => {
-  return <Spinner />;
-};
+const RestClientLoading = () => <Spinner />;
 export default RestClientLoading;

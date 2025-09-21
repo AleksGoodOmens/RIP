@@ -22,8 +22,7 @@ export async function GET(req: NextRequest) {
     }));
 
     return NextResponse.json(history);
-  } catch (error) {
-    console.error('Error fetching history:', error);
+  } catch {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -43,6 +43,7 @@ const jestConfig = {
     '!src/components/ui/**',
     '!src/interfaces/**',
     '!src/utils/zod/**',
+    '!src/app/**/loading.tsx',
   ],
 };
 
