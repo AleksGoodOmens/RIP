@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import RegisterForm from './RegisterForm';
+import RegisterForm, { onSubmitProps } from './RegisterForm';
 
 const setErrorMock = jest.fn();
 const resetMock = jest.fn();
@@ -26,7 +26,7 @@ jest.mock('@/utils/hooks/useAuth', () => ({
       onBlur: jest.fn(),
       ref: jest.fn(),
     }),
-    handleSubmit: (fn: any) => (e: any) => {
+    handleSubmit: (fn: (data: onSubmitProps) => void) => (e: Event) => {
       e.preventDefault();
       return fn({
         email: 'test@example.com',

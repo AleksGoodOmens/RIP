@@ -23,7 +23,9 @@ describe('AuthLayout', () => {
     (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
   });
 
-  const renderWithAuth = (ctx: any) => {
+  type AuthContextValue = React.ContextType<typeof AuthContext>;
+
+  const renderWithAuth = (ctx: AuthContextValue) => {
     return render(
       <AuthContext.Provider value={ctx}>
         <AuthLayout>
@@ -34,20 +36,32 @@ describe('AuthLayout', () => {
   };
 
   it('renders Navbar and children when not authenticated', () => {
-    renderWithAuth({ user: null, loading: false });
+    renderWithAuth({
+      user: null,
+      loading: false,
+      logout: async () => {},
+    });
 
     expect(screen.getByTestId('navbar')).toBeInTheDocument();
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });
 
   it('renders loading message when loading is true', () => {
-    renderWithAuth({ user: null, loading: true });
+    renderWithAuth({
+      user: null,
+      loading: true,
+      logout: async () => {},
+    });
 
     expect(screen.getByText('Checking auth user')).toBeInTheDocument();
   });
 
   it('redirects to "/" when user is authenticated', () => {
-    renderWithAuth({ user: { id: '123' }, loading: false });
+    renderWithAuth({
+      user: { uid: '123' } as never,
+      loading: false,
+      logout: async () => {},
+    });
 
     expect(pushMock).toHaveBeenCalledWith('/');
   });

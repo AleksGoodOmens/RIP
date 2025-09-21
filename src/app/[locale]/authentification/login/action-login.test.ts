@@ -9,22 +9,22 @@ const testMessage = 'test message';
 
 jest.mock('next/navigation', () => ({
   __esModule: true,
-  redirect: (...args: any[]) => mockRedirect(...args),
+  redirect: (...args: unknown[]) => mockRedirect(...args),
 }));
 
 jest.mock('@/firebase/auth', () => ({
   __esModule: true,
-  doSignInWithEmailAndPassword: (...args: any[]) => mockSignIn(...args),
+  doSignInWithEmailAndPassword: (...args: unknown[]) => mockSignIn(...args),
 }));
 
 jest.mock('@/utils/zod/parse-form', () => ({
   __esModule: true,
-  parseForm: (...args: any[]) => mockParseForm(...args),
+  parseForm: (...args: unknown[]) => mockParseForm(...args),
 }));
 
 jest.mock('@/utils/authErrors', () => ({
   __esModule: true,
-  mapFirebaseErrorToField: (...args: any[]) => mockMapError(...args),
+  mapFirebaseErrorToField: (...args: unknown[]) => mockMapError(...args),
 }));
 
 describe('loginAction', () => {
