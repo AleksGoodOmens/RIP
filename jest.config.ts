@@ -3,8 +3,20 @@ const jestConfig = {
   globals: {
     'ts-jest': {
       useESM: true,
+      tsconfig: {
+        jsx: 'react-jsx',
+      },
     },
   },
+  coverageThreshold: {
+    global: {
+      branches: 27,
+      functions: 27,
+      lines: 48,
+      statements: 48,
+    },
+  },
+  verbose: true,
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transformIgnorePatterns: [
     'node_modules/(?!(react-syntax-highlighter|next-intl|@formatjs|intl-messageformat|lucide-react|@radix-ui|lodash-es)/)',
@@ -15,7 +27,7 @@ const jestConfig = {
     '\\.css$': 'identity-obj-proxy',
   },
   testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.tsx'],
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
