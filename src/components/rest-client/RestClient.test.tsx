@@ -9,6 +9,9 @@ jest.mock('next/navigation', () => ({
   useRouter: () => ({
     push: pushMock,
   }),
+  useParams: () => ({
+    url: ['POST', encodeTo64('https://api.example.com')],
+  }),
 }));
 
 jest.mock('next-intl', () => ({
@@ -40,6 +43,7 @@ jest.mock('react-syntax-highlighter/dist/esm/styles/hljs', () => ({
 }));
 
 import RestClient from './RestClient';
+import { encodeTo64 } from '@/lib/utils';
 
 beforeEach(() => {
   Storage.prototype.getItem = jest.fn(() => JSON.stringify([['token', 'abc']]));
