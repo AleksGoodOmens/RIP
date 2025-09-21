@@ -44,7 +44,7 @@ const eslintConfig = [
       'no-debugger': 'warn',
       'no-alert': 'warn',
       'no-inline-comments': 'warn',
-      'line-comment-position': ['warn', { 'position': 'above' }],
+      'line-comment-position': ['warn', { position: 'above' }],
       'no-comments/disallowComments': 'warn',
     },
   },
@@ -89,14 +89,7 @@ const eslintConfig = [
   },
 
   {
-    ignores: [
-      'node_modules/**',
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
-      'coverage',
-    ],
+    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'coverage'],
   },
 ];
 

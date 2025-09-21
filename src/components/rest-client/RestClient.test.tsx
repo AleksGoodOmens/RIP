@@ -42,8 +42,9 @@ jest.mock('react-syntax-highlighter/dist/esm/styles/hljs', () => ({
   atomOneLight: {},
 }));
 
-import RestClient from './RestClient';
 import { encodeTo64 } from '@/lib/utils';
+
+import RestClient from './RestClient';
 
 beforeEach(() => {
   Storage.prototype.getItem = jest.fn(() => JSON.stringify([['token', 'abc']]));
