@@ -42,3 +42,24 @@ jest.mock('react-syntax-highlighter/dist/esm/styles/hljs', () => ({
   atomOneLight: {},
 }));
 fetchMock.enableMocks();
+
+jest.mock('next-intl', () => ({
+  __esModule: true,
+  useTranslations: () => (key: string) => key,
+  useLocale: () => 'en',
+  IntlProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
+
+jest.mock('next-intl/server', () => ({
+  __esModule: true,
+  getTranslations: jest.fn(),
+}));
+
+jest.mock('next/navigation', () => ({
+  __esModule: true,
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    refresh: jest.fn(),
+  }),
+}));
