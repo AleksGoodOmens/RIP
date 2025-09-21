@@ -111,8 +111,6 @@ describe('HistoryClient', () => {
 
     expect(await screen.findByTestId('history-empty')).toBeInTheDocument();
 
-    expect(consoleSpy).toHaveBeenCalledWith(expect.any(Error));
-
     consoleSpy.mockRestore();
   });
 });

@@ -25,17 +25,13 @@ interface StoredData {
 }
 
 async function sendRequestMetrics(data: StoredData, uid: string): Promise<void> {
-  try {
-    await fetch(`/api/history?uid=${uid}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-  } catch (error) {
-    console.error('Failed to send request metrics:', error);
-  }
+  void fetch(`/api/history?uid=${uid}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
 }
 
 interface SendUniversalRequestProps {
@@ -141,9 +137,7 @@ export async function sendUniversalRequest({
       url,
     };
 
-    sendRequestMetrics({ metrics, base64 }, uid).catch((error) =>
-      console.error('Failed to send metrics:', error)
-    );
+    void sendRequestMetrics({ metrics, base64 }, uid);
 
     return {
       status: response.status,
@@ -165,11 +159,8 @@ export async function sendUniversalRequest({
       url,
     };
 
-    sendRequestMetrics({ metrics, base64 }, uid).catch((err) =>
-      console.error('Failed to send error metrics:', err)
-    );
+    void sendRequestMetrics({ metrics, base64 }, uid);
 
-    console.error('Request failed:', error);
     return {
       status: 0,
       body: error instanceof Error ? error.message : 'Unknown error occurred',

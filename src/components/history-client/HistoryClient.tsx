@@ -14,7 +14,7 @@ export const HistoryClient = () => {
     fetch(`/api/history?uid=${uid}`)
       .then((res) => res.json())
       .then((items) => setList(items))
-      .catch((err) => console.log(err));
+      .catch((err) => setList(err));
   }, [uid]);
 
   const sortedItems = useMemo(() => {
